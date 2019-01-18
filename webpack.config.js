@@ -13,6 +13,9 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	resolve: {
+		alias: {
+			'~': path.resolve(__dirname, 'src'),
+		},
 		extensions: ['.js', '.jsx']
 	},
 	module: {
@@ -20,10 +23,12 @@ module.exports = {
 			{ 
 				test: /\.jsx?$/,
 				exclude: /node_modules/,
-				use: { 
-					loader: 'babel-loader'
-				},
-			}
+				loader: ['babel-loader']
+			},
+			{
+				test: /\.css$/,
+				loader: ['style-loader', 'css-loader']
+			},
 		]
 	},
 	plugins: [htmlPlugin]
