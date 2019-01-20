@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import Profile from '~/components/Profile/Profile';
 import { BACKGROUND_COLOR } from '~/constants/styles';
 
 const StyledPanel = styled.div`
@@ -18,7 +19,7 @@ class ControlPanel extends Component {
 	render() {
 		return (
 			<StyledPanel>
-				
+				<Profile />
 			</StyledPanel>
 		);
 	}
