@@ -12,4 +12,22 @@ let config = {
 
 firebase.initializeApp(config);
 
-export const firestore = firebase.firestore();
+let firestore = firebase.firestore();
+
+function isObject(obj) {
+	return (typeof obj === 'object' || obj instanceof Object) &&!!obj;
+}
+
+export const insertProfileData = (data) => {
+	if (isObject(data) && Object.keys(data).length > 0) {
+		firestore.collection('users').add(data).catch((err) => console.log(err));
+	}
+};
+
+export const selectProfileData = () => {
+	firestore.collection('users').get().then((snapshot) => {
+		snapshot.docs.forEach(doc => {
+			console.log(doc.data())
+		})
+	});
+};
