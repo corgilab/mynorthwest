@@ -1,33 +1,42 @@
 import firebase from 'firebase'
-import * as param from '~/constants/firebase';
+import * as db from '~/constants/firebase';
 
-let config = {
-	apiKey: param.API_KEY,
-	authDomain: param.AUTH_DOMAIN,
-	databaseURL: param.DATABASE_URL,
-	projectId: param.PROJECT_ID,
-	storageBucket: param.STORAGE_BUCKET,
-	messagingSenderId: param.MESSAGING_SENDER_ID
-};
+const firestore = firebase.initializeApp({
+		apiKey: db.API_KEY,
+		authDomain: db.AUTH_DOMAIN,
+		databaseURL: db.DATABASE_URL,
+		projectId: db.PROJECT_ID,
+		storageBucket: db.STORAGE_BUCKET,
+		messagingSenderId: db.MESSAGING_SENDER_ID
+	})
+	.firestore();
 
-firebase.initializeApp(config);
-
-let firestore = firebase.firestore();
-
-function isObject(obj) {
-	return (typeof obj === 'object' || obj instanceof Object) &&!!obj;
-}
+const isObject = (obj) => ((typeof obj === 'object' || obj instanceof Object) && !!obj);
 
 export const insertProfileData = (data) => {
 	if (isObject(data) && Object.keys(data).length > 0) {
-		firestore.collection('users').add(data).catch((err) => console.log(err));
+		return firestore.collection('users').add(data);
 	}
 };
 
-export const selectProfileData = () => {
-	firestore.collection('users').get().then((snapshot) => {
-		snapshot.docs.forEach(doc => {
-			console.log(doc.data())
+export const isUserExist = (id) => (
+ 	firestore.collection('users').doc(id).get()
+		.then(doc => doc.exists ? true : false)
+		.catch(err => console.error(err))
+);
+
+export const selectProfileData = (id) => {
+	const user = firestore.collection('users').doc(id);
+
+	user.get()
+		.then( doc => {
+			if ( doc.exists ){
+				console.log(doc.data());
+			}
+			else{
+				throw 'Document isn\'t exists';
+			}
 		})
-	});
+		.catch( err => console.error(err) );
+
 };
