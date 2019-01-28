@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import Profile from '~/components/Profile/Profile';
+import Points from '~/components/Points/Points';
 import { BACKGROUND_COLOR } from '~/constants/styles';
+import { loadState } from '~/helpers/localStorage';
 
 const StyledPanel = styled.div`
 	width: 10%;
@@ -13,13 +15,18 @@ const StyledPanel = styled.div`
 
 class ControlPanel extends Component {
 	state = {
-
+		userId: loadState('user_id'),
 	};
 
 	render() {
+		const { userId } = this.state;
 		return (
 			<StyledPanel>
-				<Profile />
+				{ userId ? 
+					<Points />
+					:
+					<Profile />
+				}
 			</StyledPanel>
 		);
 	}

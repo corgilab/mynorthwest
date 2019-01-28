@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { loadState, saveState } from '~/helpers/localStorage';
+import { saveState } from '~/helpers/localStorage';
 import { AGES, SEX, ANSWERS, ACTIONS } from '~/constants/profile';
+import { insertProfileData } from '~/helpers/firebase';
 
 const StyledProfile = styled.form`
 
@@ -36,21 +37,26 @@ class Profile extends React.PureComponent {
 				checkedActions[index] = elem.checked ? elem.value : null
 				)
 		);
-		this.setState({
+
+		const profileData = {
 			age: event.target.age.value,
 			sex: event.target.sex.value,
 			answer: event.target.answer.value,
 			action: checkedActions,
-		});
+		};
 
+		// Add profile data to Firebase and save user's id in localStorage
+		insertProfileData(profileData)
+			.then(res => { saveState('user_id', res.id); return res.id } )
+			.catch( err => console.error(err) );
 	}
 
 	componentDidMount(){
-		this.setState( loadState() );
+		//this.setState( loadState() );
 	}
 
 	componentDidUpdate(){
-		saveState(this.state);
+		//saveState(this.state);
 	}
 
 	render(){
@@ -67,7 +73,6 @@ class Profile extends React.PureComponent {
 									type='radio' 
 									name='age' 
 									value={ value }
-									defaultValue={ this.state.age }
 									id={`age${ index }`} />
 								<label htmlFor={`age${ index }`}>{ value }</label>
 							</li>
