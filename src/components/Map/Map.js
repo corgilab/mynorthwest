@@ -3,6 +3,7 @@ import MapGL, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import ControlPanel from '~/components/ControlPanel/ControlPanel';
+import CorgiLab from '~/components/CorgiLab/CorgiLab';
 import { TOKEN, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -18,7 +19,8 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 		viewport: {
 			latitude: LATITUDE,
 			longitude: LONGITUDE,
-			zoom: ZOOM
+			zoom: ZOOM,
+			attributionControl: false
 		},
 		points: []
 	};
@@ -54,13 +56,6 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 		}
 	};
 
-	handlePointDragEnd = (event, ind) => {
-		event.preventDefault();
-		console.log(event);
-		console.log(ind)
-		//change position of point in the this.state.points[ind]
-	};
-
 	render() {
 		const { viewport } = this.state;
 
@@ -80,13 +75,13 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 							longitude={val.long}
 							latitude={val.lat}
 							draggable={true}
-							onDragEnd={(event) => this.handlePointDragEnd(event, ind)}
 						>
 							<div>Pin {val.type}</div>
 						</Marker>
 					))
 				}
 				<ControlPanel />
+				<CorgiLab/>
 			</MapGL>
 		);
 	}
