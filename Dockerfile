@@ -1,6 +1,6 @@
 FROM node:7.10 as build-deps 
 WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 COPY . ./
 RUN npm run build
 
