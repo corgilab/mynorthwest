@@ -14,18 +14,15 @@ const StyledPanel = styled.div`
 `;
 
 class ControlPanel extends Component {
-	state = {
-		userId: loadState('user_id'),
-	};
+	userId = loadState('user_id');
 
 	render() {
-		const { userId } = this.state;
 		return (
 			<StyledPanel>
-				{ userId ? 
+				{ this.userId ? 
 					<Points />
 					:
-					<Profile />
+					<Profile userId={this.userId} />
 				}
 			</StyledPanel>
 		);

@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import ControlPanel from './ControlPanel/ControlPanel';
+import ControlPanel from '~/components/ControlPanel/ControlPanel';
+import { TOKEN, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 
-const mapboxToken = "pk.eyJ1IjoiZ3Jpc21lIiwiYSI6ImNqaTBhODJvMzEyaDAzcW9ldW1ybTNleXEifQ.wzvwfOMRBdoECeg3v5lFew";
 
 class Map extends Component {
   state = {
     viewport: {
-      latitude: 51.741117,
-      longitude: 36.135659,
-      zoom: 14.5
+      latitude: LATITUDE,
+      longitude: LONGITUDE,
+      zoom: ZOOM
     }
   };
 
@@ -29,7 +29,7 @@ class Map extends Component {
         { ...viewport }
         width="100vw"
         height="100vh"
-        mapboxApiAccessToken={ mapboxToken }
+        mapboxApiAccessToken={ TOKEN }
         onViewportChange={ this.updateMap } 
       >
         <ControlPanel />
