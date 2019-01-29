@@ -54,13 +54,6 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 		}
 	};
 
-	handlePointDragEnd = (event, ind) => {
-		event.preventDefault();
-		console.log(event);
-		console.log(ind)
-		//change position of point in the this.state.points[ind]
-	};
-
 	render() {
 		const { viewport } = this.state;
 
@@ -80,7 +73,6 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 							longitude={val.long}
 							latitude={val.lat}
 							draggable={true}
-							onDragEnd={(event) => this.handlePointDragEnd(event, ind)}
 						>
 							<div>Pin {val.type}</div>
 						</Marker>
