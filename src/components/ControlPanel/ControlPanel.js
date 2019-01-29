@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { observable, action } from 'mobx';
+import { observer } from 'mobx-react';
 
 import Profile from '~/components/Profile/Profile';
 import Points from '~/components/Points/Points';
@@ -13,8 +15,13 @@ const StyledPanel = styled.div`
 	background: ${ BACKGROUND_COLOR };
 `;
 
-class ControlPanel extends Component {
-	userId = loadState('user_id');
+@observer class ControlPanel extends Component {
+	@observable userId = loadState('user_id');
+
+	@action fillProfile = (id) => {
+		console.log(id);
+		this.userId = id;
+	}
 
 	render() {
 		return (
@@ -22,7 +29,7 @@ class ControlPanel extends Component {
 				{ this.userId ? 
 					<Points />
 					:
-					<Profile userId={this.userId} />
+					<Profile fillProfile={ this.fillProfile } />
 				}
 			</StyledPanel>
 		);

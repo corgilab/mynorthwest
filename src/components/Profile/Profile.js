@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { observable, action } from 'mobx';
+import { observer } from 'mobx-react';
 
 import { saveState } from '~/helpers/localStorage';
 import { AGES, SEX, ANSWERS, ACTIONS } from '~/constants/profile';
@@ -20,43 +22,39 @@ const List = styled.ul`
 	font-size: 0.8rem;
 `;
 
-class Profile extends React.PureComponent {
-	state = {
-		age: null,
-		sex: null,
-		answer: null,
-		action: [],
-	}
+@observer class Profile extends React.PureComponent {
+	@observable saveInputDisabled = false;
 
-	handleSubmit = (event) => {
-		event.preventDefault();
-
+	getSubmitData = (target) => {
 		let checkedActions = [];
-		event.target.action.forEach(
+		target.action.forEach(
 			(elem, index) => (
 				checkedActions[index] = elem.checked ? elem.value : null
-				)
+			)
 		);
 
-		const profileData = {
-			age: event.target.age.value,
-			sex: event.target.sex.value,
-			answer: event.target.answer.value,
+		return {
+			age: target.age.value,
+			sex: target.sex.value,
+			answer: target.answer.value,
 			action: checkedActions,
 		};
+	}
+
+	@action
+	handleSubmit = (event) => {
+		event.preventDefault();
+		this.saveInputDisabled = true;
+		
+		const profileData = this.getSubmitData(event.target);
+		const { fillProfile } = this.props;
 
 		// Add profile data to Firebase and save user's id in localStorage
 		insertProfileData(profileData)
-			.then(res => { saveState('user_id', res.id); return res.id } )
-			.catch( err => console.error(err) );
-	}
-
-	componentDidMount(){
-		//this.setState( loadState() );
-	}
-
-	componentDidUpdate(){
-		//saveState(this.state);
+			.then( res => saveState('user_id', res.id) )
+			.then( res => fillProfile(res) )
+			.catch( err => console.error(err) )
+			.finally(() => this.saveInputDisabled = false);
 	}
 
 	render(){
@@ -127,6 +125,8 @@ class Profile extends React.PureComponent {
 					}
 				</List>
 				<input 
+					name='save'
+					disabled={ this.saveInputDisabled }
 					type='submit'
 					value='Сохранить' />
 			</StyledProfile>
