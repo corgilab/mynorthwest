@@ -1,7 +1,8 @@
 FROM node:7.10 as build-deps 
 WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json webpack.config.js ./
 COPY . ./
+RUN npm install
 RUN npm run build
 
 FROM nginx:1.12-alpine
