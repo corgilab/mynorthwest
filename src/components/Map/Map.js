@@ -18,7 +18,8 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 		viewport: {
 			latitude: LATITUDE,
 			longitude: LONGITUDE,
-			zoom: ZOOM
+			zoom: ZOOM,
+			attributionControl: false
 		},
 		points: []
 	};
