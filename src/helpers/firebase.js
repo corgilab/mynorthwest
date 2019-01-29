@@ -20,7 +20,7 @@ export const insertProfileData = (data) => {
 };
 
 export const isUserExist = (id) => (
- 	firestore.collection('users').doc(id).get()
+	firestore.collection('users').doc(id).get()
 		.then(doc => doc.exists ? true : false)
 		.catch(err => console.error(err))
 );
@@ -30,13 +30,39 @@ export const selectProfileData = (id) => {
 
 	user.get()
 		.then( doc => {
-			if ( doc.exists ){
+			if ( doc.exists ) {
 				console.log(doc.data());
 			}
-			else{
+			else {
 				throw 'Document isn\'t exists';
 			}
 		})
 		.catch( err => console.error(err) );
 
+};
+
+export const insertPoint = (point) => {
+	if (isObject(point) && Object.keys(point).length > 0) {
+		return firestore.collection('points').add(point);
+	}
+};
+
+export const selectPoints = (id) => {
+	const point = firestore.collection('points');
+	let userPoints = [];
+	point.get()
+		.then( snapshot => {
+			snapshot.docs.forEach(doc => {
+				if (doc.exists) {
+					if (doc.data().userId === id) {
+						userPoints.push(doc.data());
+					}
+				} else {
+					throw 'Document isn\'t exists';
+				}
+			});
+			return userPoints;
+		})
+		.catch( err => console.error(err) );
+	return userPoints;
 };
