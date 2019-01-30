@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import MapGL, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import ControlPanel from '~/components/ControlPanel/ControlPanel';
-import CorgiLab from '~/components/CorgiLab/CorgiLab';
+import Logo from '~/components/Logo/Logo';
 import { TOKEN, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -63,7 +62,7 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 			<MapGL
 				{ ...viewport }
 				width="100vw"
-				height="100vh"
+        height="100vh"
 				mapboxApiAccessToken={ TOKEN }
 				onViewportChange={ this.updateMap }
 				onClick={this.handleAddPoint.bind(this)}
@@ -80,8 +79,7 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 						</Marker>
 					))
 				}
-				<ControlPanel />
-				<CorgiLab/>
+        <Logo />
 			</MapGL>
 		);
 	}

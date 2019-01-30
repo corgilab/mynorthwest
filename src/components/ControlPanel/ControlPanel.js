@@ -9,6 +9,8 @@ import { BACKGROUND_COLOR } from '~/constants/styles';
 import { loadState } from '~/helpers/localStorage';
 
 const StyledPanel = styled.div`
+	position: absolute;
+	z-index: 10;
 	width: 10%;
 	height: 100vh;
 	min-width: 250px;
