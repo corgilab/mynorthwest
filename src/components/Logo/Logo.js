@@ -1,22 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CorgiLogo = styled.a`
+const StyledLogo = styled.a`
 	display: block;
-	background: #fff no-repeat center;
-	width: 120px;
-	height: 120px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 	margin: 0;
 	padding: 0;
-	z-index: 100000;
+	z-index: 10;
 	position: absolute;
-	content: '';
 	right: 10px;
 	bottom: 10px;
-	box-shadow: 0 0 4px 0 #000;
+	img {
+		fill: red;
+	}
 `;
 
-const CorgiLab = () => <CorgiLogo href='http://corgilab.ru/' title='CorgiLab' target='_blank'/>
+const Logo = () => (
+	<StyledLogo 
+		href='http://corgilab.ru/' 
+		title='CorgiLab' 
+		target='_blank'
+		rel="noopener noreferrer"
+	>
+		<img src='/resources/images/corgi.svg' />
+	</StyledLogo>
+);
 
-export default CorgiLab;
+export default Logo;
