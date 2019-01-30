@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapGL, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import CorgiLab from '~/components/CorgiLab/CorgiLab';
+import Logo from '~/components/Logo/Logo';
 import { TOKEN, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -79,7 +79,7 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 						</Marker>
 					))
 				}
-        <CorgiLab />
+        <Logo />
 			</MapGL>
 		);
 	}
