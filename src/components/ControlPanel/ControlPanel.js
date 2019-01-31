@@ -5,31 +5,34 @@ import { observer } from 'mobx-react';
 
 import Profile from '~/components/Profile/Profile';
 import Points from '~/components/Points/Points';
+import { MOBILE_SIZE } from '~/constants/common';
 import { BACKGROUND_COLOR, BORDER_COLOR } from '~/constants/styles';
 import { loadState } from '~/helpers/localStorage';
+import { screenBiggerThan } from '~/helpers/common';
 
 import Blind from './Blind/Blind';
 
 const StyledPanel = styled.aside`
 	position: absolute;
 	transform: ${props => props.isOpen ? 'translateX(0)' : 'translateX(-100%)'};
-	transition: all .5s linear;
+	transition: all .25s linear;
 	z-index: 10;
 	width: 10%;
 	min-width: 250px;
 	height: 100vh;
 	background: ${ BACKGROUND_COLOR };
 	border-right: 1px solid ${ BORDER_COLOR };
-`;
 
+	@media (max-width: ${`${ MOBILE_SIZE }px`}){
+		width: 100%;
+	}
+`;
 
 
 @observer class ControlPanel extends Component {
 	@observable userId = loadState('user_id');
-	@observable isOpenMenu = false;
-
+	@observable isOpenMenu = screenBiggerThan(MOBILE_SIZE);
 	@action fillProfile = (id) => {
-		console.log(id);
 		this.userId = id;
 	}
 
