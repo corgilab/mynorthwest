@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapGL, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { TOKEN, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
+import { TOKEN, STYLE, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { loadState } from "~/helpers/localStorage";
@@ -63,6 +63,7 @@ import { insertPoint, selectPoints } from '~/helpers/firebase';
 				width="100vw"
         height="100vh"
 				mapboxApiAccessToken={ TOKEN }
+				mapStyle={ STYLE }
 				onViewportChange={ this.updateMap }
 				onClick={this.handleAddPoint.bind(this)}
 			>
