@@ -8,7 +8,7 @@ const StyledLogo = styled.a`
 	border-radius: 50%;
 	margin: 0;
 	padding: 0;
-	z-index: 10;
+	z-index: 5;
 	position: absolute;
 	right: 10px;
 	bottom: 10px;

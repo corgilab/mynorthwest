@@ -6,24 +6,35 @@ import { observer } from 'mobx-react';
 import Profile from '~/components/Profile/Profile';
 import Points from '~/components/Points/Points';
 import { MOBILE_SIZE } from '~/constants/common';
-import { BACKGROUND_COLOR, BORDER_COLOR } from '~/constants/styles';
+import { BACKGROUND_COLOR } from '~/constants/styles';
 import { loadState } from '~/helpers/localStorage';
 import { screenBiggerThan } from '~/helpers/common';
 
 import Blind from './Blind/Blind';
 
 const StyledPanel = styled.aside`
+	box-sizing: border-box;
 	position: absolute;
-	transform: ${props => props.isOpen ? 'translateX(0)' : 'translateX(-100%)'};
+	transform: ${props => props.isOpen ? 'translateX(0)' : 'translateX(calc(-100% - 25px))'};
 	transition: all .25s linear;
 	z-index: 10;
 	width: 10%;
-	min-width: 250px;
-	height: 100vh;
+	min-width: 350px;
+	min-height: 550px;
+	height: 70vh;
+	bottom: 40px;
+	left: 25px;
+	padding: 25px;
+	border-radius: 25px;
 	background: ${ BACKGROUND_COLOR };
-	border-right: 1px solid ${ BORDER_COLOR };
 
 	@media (max-width: ${`${ MOBILE_SIZE }px`}){
+		left: ${props => props.isOpen ? '0' : '25px'};
+		bottom: 0;
+		font-size: 0.9rem;
+		min-width: 300px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
 		width: 100%;
 	}
 `;

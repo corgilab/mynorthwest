@@ -5,14 +5,19 @@ import { observer } from 'mobx-react';
 
 import { saveState } from '~/helpers/localStorage';
 import { AGES, SEX, ANSWERS, ACTIONS } from '~/constants/profile';
+import { MAIN_COLOR } from '~/constants/styles';
 import { insertProfileData } from '~/helpers/firebase';
 
 const StyledProfile = styled.form`
 
 `;
 
+const Header = styled.h3`
+	margin: 0 0 20px;
+`;
+
 const Title = styled.h4`
-	margin: 0;
+	margin: 15px 0 5px;
 `;
 
 const List = styled.ul`
@@ -20,6 +25,26 @@ const List = styled.ul`
 	margin: 0;
 	padding: 0;
 	font-size: 0.8rem;
+`;
+
+const Item = styled.li`
+	label {
+		margin-left: 5px;
+	}
+`;
+
+const Button = styled.input`
+	background-color: ${ MAIN_COLOR };
+	display: block;
+	height: 40px;
+	width: 80%;
+	border: none;
+	margin: 20px auto 0;
+	font-weight: bold;
+
+	&:hover {
+		box-shadow: 0 0 3px ${ MAIN_COLOR };
+	}
 `;
 
 @observer class Profile extends React.PureComponent {
@@ -60,12 +85,12 @@ const List = styled.ul`
 	render(){
 		return (
 			<StyledProfile onSubmit={ this.handleSubmit }>
-				<Title>Пожалуйста заполните анкету</Title>
+				<Header>Пожалуйста заполните анкету</Header>
 				<List>
 					<Title>Ваш Возраст</Title>
 					{
 						AGES.map((value, index) => (
-							<li key={ index }>
+							<Item key={ index }>
 								<input 
 									required
 									type='radio' 
@@ -73,7 +98,7 @@ const List = styled.ul`
 									value={ value }
 									id={`age${ index }`} />
 								<label htmlFor={`age${ index }`}>{ value }</label>
-							</li>
+							</Item>
 						))
 					}
 				</List>
@@ -81,7 +106,7 @@ const List = styled.ul`
 					<Title>Пол</Title>
 					{
 						SEX.map((value, index) => (
-							<li key={ index }>
+							<Item key={ index }>
 								<input
 									required
 									type='radio'
@@ -89,7 +114,7 @@ const List = styled.ul`
 									value={ value }
 									id={`sex${ index }`} />
 								<label htmlFor={`sex${index}`}>{ value }</label>
-							</li>
+							</Item>
 						))
 					}
 				</List>
@@ -97,7 +122,7 @@ const List = styled.ul`
 					<Title>Вы проживаете на территории Северо-Запада?</Title>
 					{
 						ANSWERS.map((value, index) => (
-							<li key={ index }>
+							<Item key={ index }>
 								<input
 									required
 									type='radio'
@@ -105,7 +130,7 @@ const List = styled.ul`
 									value={ value }
 									id={`answer${ index }`} />
 								<label htmlFor={`answer${ index }`}>{ value }</label>
-							</li>
+							</Item>
 						))
 					}
 				</List>
@@ -113,18 +138,18 @@ const List = styled.ul`
 					<Title>На Северо-Западе Вы:</Title>
 					{
 						ACTIONS.map((value, index) => (
-							<li key={index}>
+							<Item key={index}>
 								<input
 									type='checkbox'
 									name='action'
 									value={ value }
 									id={`action${index}`} />
 								<label htmlFor={`action${index}`}>{value}</label>
-							</li>
+							</Item>
 						))
 					}
 				</List>
-				<input 
+				<Button 
 					name='save'
 					disabled={ this.saveInputDisabled }
 					type='submit'
