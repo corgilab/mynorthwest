@@ -11,13 +11,17 @@ const firestore = firebase.initializeApp({
 	})
 	.firestore();
 
-const isObject = (obj) => ((typeof obj === 'object' || obj instanceof Object) && !!obj);
+const _isObject = (obj) => ((typeof obj === 'object' || obj instanceof Object) && !!obj);
 
-export const insertProfileData = (data) => {
-	if (isObject(data) && Object.keys(data).length > 0) {
-		return firestore.collection('users').add(data);
+const _insert = (collectionName, data) => {
+	if (_isObject(data) && Object.keys(data).length > 0) {
+		return firestore.collection(collectionName).add(data);
 	}
-};
+}
+
+export const insertProfileData = (data) => (
+	_insert('users', data)
+);
 
 export const isUserExist = (id) => (
 	firestore.collection('users').doc(id).get()
@@ -38,19 +42,16 @@ export const selectProfileData = (id) => {
 			}
 		})
 		.catch( err => console.error(err) );
-
 };
 
-export const insertPoint = (point) => {
-	if (isObject(point) && Object.keys(point).length > 0) {
-		return firestore.collection('points').add(point);
-	}
-};
+export const insertPoint = (data) => (
+	_insert('points', data)
+);
 
 export const selectPoints = (id) => {
-	const point = firestore.collection('points');
+	const points = firestore.collection('points');
 	let userPoints = [];
-	point.get()
+	points.get()
 		.then( snapshot => {
 			snapshot.docs.forEach(doc => {
 				if (doc.exists) {

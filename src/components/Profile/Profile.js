@@ -14,6 +14,7 @@ const StyledProfile = styled.form`
 
 const Header = styled.h3`
 	margin: 0 0 20px;
+	font-weight: bold;
 `;
 
 const Title = styled.h4`
