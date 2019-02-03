@@ -53,17 +53,12 @@ const Icon = styled.img`
 	};
 
 	componentDidMount() {
-		if (this.userId) {
-			this.setState({
-				points: selectPoints(this.userId)
-			})
-		}
+		selectPoints()
+			.then( res => this.setState({ points: res }))
 	}
 
 	updateMap = (viewport) => {
-		this.setState({
-			viewport: viewport
-		});
+		this.setState({viewport});
 	};
 
 	handleAddPoint = (event) => {
@@ -97,20 +92,25 @@ const Icon = styled.img`
 				onClick={ this.handleAddPoint }
 			>
 				{
-					this.state.points.map((value, index) => (
-						<Marker
-							key={ index }
-							longitude={ value.long }
-							latitude={ value.lat }
-							draggable={ false }
-						>
-							<MarketImage>
-								<Icon
-									src={ find(POINTS, p => p.id === value.type).imgSrc }
-								/>
-							</MarketImage>
-						</Marker>
-					))
+					this.state.points.map((value, index) => {
+						const validPoint = find(POINTS, p => p.id === value.type);
+						return (validPoint ?
+							<Marker
+								key={ index }
+								longitude={ value.long }
+								latitude={ value.lat }
+								draggable={ false }
+							>
+								<MarketImage>
+									<Icon
+										src={ validPoint && validPoint.imgSrc }
+									/>
+								</MarketImage>
+							</Marker>
+							:
+							null
+						)
+					})
 				}
 			</MapGL>
 		);
