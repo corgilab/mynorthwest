@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app';
+import 'firebase/app';
+import 'firebase/firestore';
 import * as db from '~/constants/firebase';
 
 const firestore = firebase.initializeApp({
@@ -48,15 +50,16 @@ export const insertPoint = (data) => (
 	_insert('points', data)
 );
 
-export const selectPoints = (id) => {
+export const selectPoints = () => {
 	const points = firestore.collection('points');
 	let userPoints = [];
-	points.get()
+	return points.get()
 		.then( snapshot => {
 			snapshot.docs.forEach(doc => {
 				if (doc.exists) {
-					if (doc.data().userId === id) {
-						userPoints.push(doc.data());
+					const point = doc.data();
+					if (point.userId){
+						userPoints.push(point);
 					}
 				} else {
 					throw 'Document isn\'t exists';
@@ -65,5 +68,4 @@ export const selectPoints = (id) => {
 			return userPoints;
 		})
 		.catch( err => console.error(err) );
-	return userPoints;
 };
