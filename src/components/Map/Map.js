@@ -62,6 +62,7 @@ const Icon = styled.img`
 	};
 
 	handleAddPoint = (event) => {
+		this.pointType = loadState('point_type');
 		event.preventDefault();
 
 		if (this.pointType && this.userId) {
