@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, MemoryRouter } from 'react-router-dom';
 
 import MainPage from '~/pages/MainPage/MainPage';
 import MapPage from '~/pages/MapPage/MapPage';
@@ -9,10 +9,10 @@ const App = () => {
 		<MemoryRouter
 			initialEntries={['/', '/map']}
 			initialIndex={1} >
-
-			<Route path='/' component={ MainPage } exact />
-			<Route path='/map' component={ MapPage } exact />
-			
+			<div>
+				<Route path='/' component={ MainPage } exact />
+				<Route path='/map' component={ MapPage } exact />
+			</div>
 		</MemoryRouter>
 	);
 }
