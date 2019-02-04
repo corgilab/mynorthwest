@@ -38,13 +38,10 @@ const GlobalStyle = createGlobalStyle`
 
 
 ReactDOM.render(
-	<MemoryRouter
-		initialEntries={['/', '/map']}
-		initialIndex={1}>
-		<>
-			<App />
-			<GlobalStyle />
-		</>
-	</MemoryRouter>,
+	<>
+		<App />
+		<GlobalStyle />
+	</>
+	,
 	document.getElementById('root')
 );
