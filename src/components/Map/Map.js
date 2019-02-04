@@ -13,6 +13,7 @@ import { MAIN_COLOR } from '~/constants/styles';
 import { POINTS } from '~/constants/points';
 
 const MarketImage = styled.span`
+	pointer-events: none;
 	position: relative;
 	top: -50px;
 	left: -20px;
