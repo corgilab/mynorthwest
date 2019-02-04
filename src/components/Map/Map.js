@@ -86,7 +86,7 @@ const Icon = styled.img`
 			<MapGL
 				{ ...viewport }
 				width='100vw'
-        		height='100vh'
+				height='100vh'
 				mapboxApiAccessToken={ TOKEN }
 				mapStyle={ STYLE }
 				onViewportChange={ this.updateMap }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
+import { MemoryRouter } from 'react-router-dom';
 
 import App from './components/App/App';
 
@@ -37,9 +38,13 @@ const GlobalStyle = createGlobalStyle`
 
 
 ReactDOM.render(
-	<React.Fragment>
-		<App />
-		<GlobalStyle />
-	</React.Fragment>,
+	<MemoryRouter
+		initialEntries={['/', '/map']}
+		initialIndex={1}>
+		<>
+			<App />
+			<GlobalStyle />
+		</>
+	</MemoryRouter>,
 	document.getElementById('root')
 );
