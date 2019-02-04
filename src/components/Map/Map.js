@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import MapGL, { Marker } from 'react-map-gl';
-import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import find from 'lodash/find';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { loadState } from "~/helpers/localStorage";
 import { insertPoint, selectPoints } from '~/helpers/firebase';
 import { TOKEN, STYLE, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { MAIN_COLOR } from '~/constants/styles';
@@ -20,14 +18,14 @@ const MarketImage = styled.span`
 	
 	&:after {
 		content: '';
-    position: absolute;
+    	position: absolute;
 		box-sizing: border-box;
-    display: block;
-    left: calc(50% - 10px);
+    	display: block;
+    	left: calc(50% - 10px);
 		top: 10px;
-    border-style: solid;
-    border-color: ${ MAIN_COLOR } transparent transparent transparent;
-    border-width: 10px;
+		border-style: solid;
+		border-color: ${ MAIN_COLOR } transparent transparent transparent;
+		border-width: 10px;
 	}
 `;
 
@@ -40,8 +38,9 @@ const Icon = styled.img`
 `;
 
 @observer class Map extends Component {
-	@observable pointType = loadState('point_type');
-	@observable userId = loadState('user_id');
+	store = this.props.store;
+	userId = this.store.userId;
+	pointType = this.store.pointType;
 
 	state = {
 		viewport: {
@@ -63,7 +62,7 @@ const Icon = styled.img`
 	};
 
 	handleAddPoint = (event) => {
-		this.pointType = loadState('point_type');
+		this.pointType = this.store.pointType;
 		event.preventDefault();
 
 		if (this.pointType && this.userId) {
@@ -87,7 +86,7 @@ const Icon = styled.img`
 			<MapGL
 				{ ...viewport }
 				width='100vw'
-        height='100vh'
+        		height='100vh'
 				mapboxApiAccessToken={ TOKEN }
 				mapStyle={ STYLE }
 				onViewportChange={ this.updateMap }
