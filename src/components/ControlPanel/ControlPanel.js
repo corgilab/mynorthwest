@@ -41,10 +41,11 @@ const StyledPanel = styled.aside`
 
 
 @observer class ControlPanel extends Component {
-	@observable userId = loadState('user_id');
+	store = this.props.store;
+	@observable userId = this.store.userId;
 	@observable isOpenMenu = screenBiggerThan(MOBILE_SIZE);
 	@action fillProfile = (id) => {
-		this.userId = id;
+		this.userId = this.store.setUserId(id);
 	}
 
 	@action handleBlindClick = () => {
@@ -56,7 +57,7 @@ const StyledPanel = styled.aside`
 			<StyledPanel isOpen={ this.isOpenMenu }>
 				<Blind handleBlindClick={ this.handleBlindClick } isOpen={ this.isOpenMenu } />
 				{ this.userId ? 
-					<Points />
+					<Points store={ this.store } />
 					:
 					<Profile fillProfile={ this.fillProfile } />
 				}
