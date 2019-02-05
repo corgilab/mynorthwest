@@ -49,8 +49,65 @@ const Icon = styled.img`
 			zoom: ZOOM,
 			attributionControl: false
 		},
-		points: []
+		points: [],
+		features: [
+			{
+				"type": "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [LONGITUDE, LATITUDE]
+				},
+				"properties": {
+					"title": "Test Point",
+					"icon": "gym"
+				}
+			},
+			{
+				"type": "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [36.135236593668125,  51.74294485208462]
+				},
+				"properties": {
+					"title": "children",
+					"icon": "children"
+				}
+			},
+			{
+				"type": "Feature",
+				"geometry": {
+					"type": "Point",
+					"coordinates": [36.13784137605365, 51.742149580251734]
+				},
+				"properties": {
+					"title": "sport",
+					"icon": "sport"
+				}
+			}
+		]
 	};
+
+	_addLayer = () => {
+		const map = this.mapRef.getMap();
+		map.addLayer({
+			"id": "points",
+			"type": "symbol",
+			"source": {
+				"type": "geojson",
+				"data": {
+					"type": "FeatureCollection",
+					"features": this.state.features
+				}
+			},
+			"layout": {
+				"icon-image": "{icon}",
+				"text-field": "{title}",
+				//"text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+				// "text-offset": [0, 0.6],
+				"text-anchor": "top"
+			}
+		});
+	}
 
 	componentDidMount() {
 		selectPoints()
@@ -85,12 +142,14 @@ const Icon = styled.img`
 		return (
 			<MapGL
 				{ ...viewport }
+				ref={ map => this.mapRef = map }
 				width='100vw'
 				height='100vh'
 				mapboxApiAccessToken={ TOKEN }
 				mapStyle={ STYLE }
 				onViewportChange={ this.updateMap }
 				onClick={ this.handleAddPoint }
+				onLoad={ this._addLayer }
 			>
 				{
 					this.state.points.map((value, index) => {
