@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { MAP_ROUTE } from '~/constants/routers';
 
-const MainPage = (props) => {
+const MainPage = () => {
 	return (
 		<>
-			MAIN PAGE
+			<Link to={ MAP_ROUTE }>
+				Открыть карту
+			</Link>
 		</>
 	);
 }
