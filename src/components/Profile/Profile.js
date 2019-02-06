@@ -51,7 +51,7 @@ const Button = styled.input`
 @observer class Profile extends React.PureComponent {
 	@observable saveInputDisabled = false;
 
-	getSubmitData = (target) => {
+	_getSubmitData = (target) => {
 		let checkedActions = [];
 		target.action.forEach(
 			(elem, index) => (
@@ -69,16 +69,16 @@ const Button = styled.input`
 
 	@action
 	handleSubmit = (event) => {
+		const profileData = this._getSubmitData(event.target);
+		const { store } = this.props;
+		
 		event.preventDefault();
 		this.saveInputDisabled = true;
-		
-		const profileData = this.getSubmitData(event.target);
-		const { fillProfile } = this.props;
 
 		// Add profile data to Firebase and save user's id in localStorage
 		insertProfileData(profileData)
 			.then( res => saveState('user_id', res.id) )
-			.then( res => fillProfile(res) )
+			.then( res => store.setUserId(res) )
 			.catch( err => console.error(err) )
 			.finally(() => this.saveInputDisabled = false);
 	}

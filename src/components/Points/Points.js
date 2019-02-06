@@ -40,14 +40,16 @@ const Image = styled.img`
 `;
 
 @observer class Points extends Component {
-	store = this.props.store;
 	@observable activePoint = POINTS[0].id;
 
 	@action
 	handlePointClick = (event) => {
+		const { store } = this.props;
+
 		event.preventDefault();
+
 		this.activePoint = event.currentTarget.dataset.pointId;
-		this.store.setPointType(this.activePoint);
+		store.setPointType(this.activePoint);
 	};
 
 	render() {
