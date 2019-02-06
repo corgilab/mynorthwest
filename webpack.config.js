@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const PATH_TO_RESOURCES = {
-	prod: JSON.stringify('https://mynorthwest.ams3.digitaloceanspaces.com/fonts/GothamPro-Light.woff'),
+	prod: JSON.stringify('https://mynorthwest.ams3.digitaloceanspaces.com'),
 	dev: JSON.stringify('/resources'),
 }
 
