@@ -24,7 +24,7 @@ const Logo = () => (
 		target='_blank'
 		rel="noopener noreferrer"
 	>
-		<img src='/resources/images/corgi.svg' />
+		<img src={`${ PATH_TO_RESOURCES }/images/corgi.svg`} />
 	</StyledLogo>
 );
 
