@@ -10,8 +10,8 @@ const MapPage = () => {
 	return (
 		<>
 			<Navigation />
-			<ControlPanel store={store} />
-			<Map store={store} />
+			<ControlPanel store={ store } />
+			<Map store={ store } />
 			<Logo />
 		</>
 	);

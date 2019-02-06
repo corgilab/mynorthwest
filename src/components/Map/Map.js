@@ -38,10 +38,6 @@ const Icon = styled.img`
 `;
 
 @observer class Map extends Component {
-	store = this.props.store;
-	userId = this.store.userId;
-	pointType = this.store.pointType;
-
 	state = {
 		viewport: {
 			latitude: LATITUDE,
@@ -62,15 +58,16 @@ const Icon = styled.img`
 	};
 
 	handleAddPoint = (event) => {
-		this.pointType = this.store.pointType;
+		const { store } = this.props;
+		
 		event.preventDefault();
 
-		if (this.pointType && this.userId) {
+		if (store.pointType && store.userId) {
 			let newPoint = {
 				long: event.lngLat[0],
 				lat: event.lngLat[1],
-				type: this.pointType,
-				userId: this.userId
+				type: store.pointType,
+				userId: store.userId
 			};
 			this.setState({
 				points: [...this.state.points, newPoint]
