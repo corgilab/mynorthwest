@@ -29,7 +29,7 @@ const Arrow = styled.img`
 const Blind = (props) => {
     return (
 		<StyledBlind isOpen={ props.isOpen } onClick={ props.handleBlindClick }>
-            <Arrow isOpen={ props.isOpen } src="/resources/images/arrow.svg" />
+            <Arrow isOpen={ props.isOpen } src={`${ PATH_TO_RESOURCES }/images/arrow.svg`} />
         </StyledBlind>
     );
 }

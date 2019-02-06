@@ -1,10 +1,13 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-const htmlPlugin = new HtmlWebPackPlugin({
-	template: './src/index.html',
-	filename: './index.html'
-});
+const PATH_TO_RESOURCES = {
+	prod: JSON.stringify('https://mynorthwest.ams3.digitaloceanspaces.com/fonts/GothamPro-Light.woff'),
+	dev: JSON.stringify('/resources'),
+}
+
+const ENV = process.env.NODE_ENV;
 
 module.exports = {
 	entry: './src/index.js',
@@ -35,5 +38,13 @@ module.exports = {
 			}
 		]
 	},
-	plugins: [htmlPlugin]
+	plugins: [
+		new HtmlWebPackPlugin({
+			template: './src/index.html',
+			filename: './index.html'
+		}),
+		new webpack.DefinePlugin({
+			'PATH_TO_RESOURCES': PATH_TO_RESOURCES[ENV],
+		}),
+	]
 };
