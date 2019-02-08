@@ -10,7 +10,7 @@ const App = () => {
 	return (
 		<MemoryRouter
 			initialEntries={[INDEX_ROUTE, MAP_ROUTE]}
-			initialIndex={1} >
+			initialIndex={0} >
 			
 			<>
 				<Route path={ INDEX_ROUTE } component={ MainPage } exact />
