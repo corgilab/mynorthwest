@@ -6,7 +6,7 @@ import { MAP_ROUTE } from '~/constants/routers';
 import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
 
 const Page = styled.main`
-	background-image: url('${ PATH_TO_RESOURCES }/images/URBAN.png');
+	background-image: linear-gradient(to top left, ${MAIN_COLOR}, #FFFA99);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -40,6 +40,11 @@ const Button = styled(Link)`
 	text-decoration: none;
 	color: ${ FONT_COLOR };
 	background-color: ${ MAIN_COLOR };
+	font-weight: bold;
+
+	&:hover {
+		box-shadow: 0 0 3px ${ MAIN_COLOR };
+	}
 `;
 
 const MainPage = () => {
