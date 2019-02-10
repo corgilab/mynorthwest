@@ -6,7 +6,7 @@ import { MAP_ROUTE } from '~/constants/routers';
 import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
 
 const Page = styled.main`
-	background-image: linear-gradient(to top left, ${MAIN_COLOR}, #FFFA99);
+	background-image: url('${PATH_TO_RESOURCES}/images/URBAN.png');
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center center;
