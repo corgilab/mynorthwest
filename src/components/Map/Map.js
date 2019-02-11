@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MapGL, { Marker } from 'react-map-gl';
-import { observer } from 'mobx-react';
 import find from 'lodash/find';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -37,28 +36,29 @@ const Icon = styled.img`
 	border-radius: 5px;
 `;
 
-@observer class Map extends Component {
-	state = {
-		viewport: {
-			latitude: LATITUDE,
-			longitude: LONGITUDE,
-			zoom: ZOOM,
-			attributionControl: false
-		},
-		points: []
+const Map = (props) => {
+	const [viewport, setViewport] = useState({
+		latitude: LATITUDE,
+		longitude: LONGITUDE,
+		zoom: ZOOM,
+		attributionControl: false
+	});
+
+	const [points, setPoints] = useState([]);
+
+	useEffect(() => {
+		if (!points.length){
+			selectPoints()
+				.then(res => setPoints(res));
+		}
+	});
+
+	const updateMap = (viewport) => {
+		setViewport(viewport);
 	};
 
-	componentDidMount() {
-		selectPoints()
-			.then( res => this.setState({ points: res }))
-	}
-
-	updateMap = (viewport) => {
-		this.setState({viewport});
-	};
-
-	handleAddPoint = (event) => {
-		const { store } = this.props;
+	const handleAddPoint = (event) => {
+		const { store } = props;
 		
 		event.preventDefault();
 
@@ -69,51 +69,43 @@ const Icon = styled.img`
 				type: store.pointType,
 				userId: store.userId
 			};
-			this.setState({
-				points: [...this.state.points, newPoint]
-			});
+			setPoints([...points, newPoint]);
 			insertPoint(newPoint)
 		}
 	};
 
-	render() {
-		const { viewport } = this.state;
-
-		return (
-			<MapGL
-				{ ...viewport }
-				ref={ map => this.mapRef = map }
-				width='100vw'
-				height='100vh'
-				mapboxApiAccessToken={ TOKEN }
-				mapStyle={ STYLE }
-				onViewportChange={ this.updateMap }
-				onClick={ this.handleAddPoint }
-				onLoad={ this._addLayer }
-			>
-				{
-					this.state.points.map((value, index) => {
-						const validPoint = find(POINTS, p => p.id === value.type);
-						return (validPoint ?
-							<Marker
-								key={ index }
-								longitude={ value.long }
-								latitude={ value.lat }
-								draggable={ false }
-							>
-								<MarketImage>
-									<Icon
-										src={ validPoint && validPoint.imgSrc }
-									/>
-								</MarketImage>
-							</Marker>
-							:
-							null
-						)
-					})
-				}
-			</MapGL>
-		);
-	}
+	return (
+		<MapGL
+			{ ...viewport }
+			width='100vw'
+			height='100vh'
+			mapboxApiAccessToken={ TOKEN }
+			mapStyle={ STYLE }
+			onViewportChange={ updateMap }
+			onClick={ handleAddPoint }
+		>
+			{
+				points.map((value, index) => {
+					const validPoint = find(POINTS, p => p.id === value.type);
+					return (validPoint ?
+						<Marker
+							key={ index }
+							longitude={ value.long }
+							latitude={ value.lat }
+							draggable={ false }
+						>
+							<MarketImage>
+								<Icon
+									src={ validPoint && validPoint.imgSrc }
+								/>
+							</MarketImage>
+						</Marker>
+						:
+						null
+					)
+				})
+			}
+		</MapGL>
+	);
 }
 export default Map;
