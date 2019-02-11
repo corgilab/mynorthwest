@@ -14,13 +14,13 @@ const MarketImage = styled.span`
 	position: relative;
 	top: -50px;
 	left: -20px;
-	
+
 	&:after {
 		content: '';
-    	position: absolute;
+		position: absolute;
 		box-sizing: border-box;
-    	display: block;
-    	left: calc(50% - 10px);
+		display: block;
+		left: calc(50% - 10px);
 		top: 10px;
 		border-style: solid;
 		border-color: ${ MAIN_COLOR } transparent transparent transparent;
@@ -41,6 +41,7 @@ const Map = (props) => {
 		latitude: LATITUDE,
 		longitude: LONGITUDE,
 		zoom: ZOOM,
+		minZoom: ZOOM,
 		attributionControl: false
 	});
 
