@@ -41,6 +41,7 @@ const Map = (props) => {
 		latitude: LATITUDE,
 		longitude: LONGITUDE,
 		zoom: ZOOM,
+		minZoom: ZOOM,
 		attributionControl: false
 	});
 
