@@ -18,5 +18,10 @@ export const POINTS = [
 		id: 'entertainments',
 		title: 'Развлечения',
 		imgSrc: `${PATH_TO_RESOURCES }/images/3d-glasses.svg`,
+	},
+	{
+		id: 'custom',
+		title: 'Другое',
+		imgSrc: `${PATH_TO_RESOURCES}/images/lamp.svg`,
 	}
 ];

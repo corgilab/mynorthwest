@@ -75,6 +75,10 @@ const Map = (props) => {
 		}
 	};
 
+	const _validatePointType = (id, type) => (
+		id === type || id === type.split('_')[0]
+	);
+
 	return (
 		<MapGL
 			{ ...viewport }
@@ -87,7 +91,8 @@ const Map = (props) => {
 		>
 			{
 				points.map((value, index) => {
-					const validPoint = find(POINTS, p => p.id === value.type);
+					const validPoint = find(POINTS, p => _validatePointType(p.id, value.type));
+
 					return (validPoint ?
 						<Marker
 							key={ index }

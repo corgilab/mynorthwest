@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-import { saveState } from '~/helpers/localStorage';
 import { POINTS } from '~/constants/points';
-import { MAIN_COLOR } from '~/constants/styles';
+import { MAIN_COLOR, BORDER_COLOR } from '~/constants/styles';
 
 const List = styled.ul`
 	list-style: none;
@@ -39,6 +38,12 @@ const Image = styled.img`
 	border-radius: 5px;
 `;
 
+const CustomInput = styled.input`
+	height: 25px;
+	padding-left: 5px;
+	border: 2px solid ${ props => props.active ? MAIN_COLOR : BORDER_COLOR};
+`;
+
 @observer class Points extends Component {
 	@observable activePoint = POINTS[0].id;
 
@@ -52,6 +57,12 @@ const Image = styled.img`
 		store.setPointType(this.activePoint);
 	};
 
+	handleChangeCustomInput = (event) => {
+		const { store } = this.props;
+		const inputValue = event.currentTarget.value;
+		store.setPointType(`custom_${inputValue}`);
+	}
+
 	render() {
 		return (
 			<List>
@@ -63,7 +74,17 @@ const Image = styled.img`
 							data-point-id={ value.id }
 							active={ this.activePoint === value.id }
 							onClick={ this.handlePointClick } >
-							{ value.title }
+							{ 
+								value.id === 'custom' ? 
+									<CustomInput 
+										type='text' 
+										placeholder={value.title} 
+										active={ this.activePoint === value.id }
+										onChange={ this.handleChangeCustomInput }
+									/> 
+									:
+									value.title
+							}
 							<Image 
 								src={ value.imgSrc } 
 							/>
