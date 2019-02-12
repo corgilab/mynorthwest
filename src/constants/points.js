@@ -22,6 +22,6 @@ export const POINTS = [
 	{
 		id: 'custom',
 		title: 'Другое',
-		imgSrc: `${PATH_TO_RESOURCES}/images/lamp.svg`,
+		imgSrc: `${PATH_TO_RESOURCES}/images/idea.svg`,
 	}
 ];
