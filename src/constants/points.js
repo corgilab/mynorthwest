@@ -1,23 +1,27 @@
 export const POINTS = [
 	{
 		id: 'sport',
-		title: 'Спортивные занятия',
+		title: 'Спорт',
 		imgSrc: `${ PATH_TO_RESOURCES }/images/gym.svg`,
+		subcategories: ['Велопрокат', 'Тренажеры', 'Настольный теннис', 'Волейбол', 'Баскетбол', 'Скейтпарк', 'Поле для мини-футбола'],
 	},
 	{
 		id: 'nature',
-		title: 'Природа',
+		title: 'Культура',
 		imgSrc: `${PATH_TO_RESOURCES }/images/tree-2.svg`,
+		subcategories: ['Соседский центр', 'Сцена', 'Буккроссинг', 'Миниферма', 'Беседка', 'Кафе'],
 	},
 	{
 		id: 'children',
-		title: 'Семейный отдых',
+		title: 'Дети',
 		imgSrc: `${ PATH_TO_RESOURCES }/images/family.svg`,
+		subcategories: ['Качели', 'Горки', 'Батуты', 'Скалодром', 'Лабиринт'],
 	},
 	{
 		id: 'entertainments',
-		title: 'Развлечения',
+		title: 'События',
 		imgSrc: `${PATH_TO_RESOURCES }/images/3d-glasses.svg`,
+		subcategories: ['Ярмарки', 'Кино на открытом воздухе', 'Дискотека', 'Мастер-классы', 'Лекции', 'Гастрономический фестиваль'],
 	},
 	{
 		id: 'custom',
