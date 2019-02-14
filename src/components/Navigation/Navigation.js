@@ -29,7 +29,7 @@ const Navigation = () => {
         <StyledNavigation>
             <Title>
                 <StyledLink to='/'>
-                    МойСевероЗапад.рф
+                    <u>МойСевероЗапад.рф</u>
                 </StyledLink>
             </Title>
         </StyledNavigation>
