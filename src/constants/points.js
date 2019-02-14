@@ -7,7 +7,7 @@ export const POINTS = [
 	},
 	{
 		id: 'nature',
-		title: 'Культура',
+		title: 'Досуг',
 		imgSrc: `${PATH_TO_RESOURCES }/images/vinyl.svg`,
 		subcategories: ['Соседский центр', 'Сцена', 'Буккроссинг', 'Миниферма', 'Беседка', 'Кафе'],
 	},
