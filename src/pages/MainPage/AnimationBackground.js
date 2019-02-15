@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Image = styled.div`
-	background-image: url('${PATH_TO_RESOURCES}/images/main/back5.svg');
+	background-image: url('${PATH_TO_RESOURCES}/images/mainPage/back5.svg');
     background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center center;
