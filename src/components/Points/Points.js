@@ -87,7 +87,8 @@ const CustomInput = styled.input`
 							<Row
 								data-point-id={ value.id }
 								active={ this.activePoint === value.id }
-								onClick={ this.handlePointClick } >
+								onClick={ this.handlePointClick }
+							>
 								{ 
 									value.id === 'custom' ? 
 										(
