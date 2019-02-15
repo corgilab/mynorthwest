@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 
 import { saveState } from '~/helpers/localStorage';
 import { AGES, SEX, ANSWERS, ACTIONS } from '~/constants/profile';
-import { MAIN_COLOR } from '~/constants/styles';
+import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
 import { insertProfileData } from '~/helpers/firebase';
 
 const StyledProfile = styled.form`
@@ -23,7 +23,7 @@ const Title = styled.h4`
 
 const List = styled.ul`
 	list-style: none;
-	margin: 0;
+	margin: 0 0 5px;
 	padding: 0;
 	font-size: 0.8rem;
 `;
@@ -35,20 +35,19 @@ const Item = styled.li`
 `;
 
 const Button = styled.input`
-	background-color: ${ MAIN_COLOR };
 	display: block;
 	height: 40px;
+	color: ${ FONT_COLOR };
+	background-color: ${ MAIN_COLOR };
+	font-family: inherit;
+	font-size: 14px;
 	width: 80%;
 	border: none;
 	margin: 20px auto 0;
 	font-weight: bold;
-
-	&:hover {
-		box-shadow: 0 0 3px ${ MAIN_COLOR };
-	}
 `;
 
-@observer class Profile extends React.PureComponent {
+@observer class Profile extends React.Component {
 	@observable saveInputDisabled = false;
 
 	_getSubmitData = (target) => {
