@@ -8,7 +8,7 @@ export const POINTS = [
 	{
 		id: 'nature',
 		title: 'Досуг',
-		imgSrc: `${PATH_TO_RESOURCES }/images/vinyl.svg`,
+		imgSrc: `${PATH_TO_RESOURCES }/images/ferris-wheel.svg`,
 		subcategories: ['Соседский центр', 'Сцена', 'Буккроссинг', 'Миниферма', 'Беседка', 'Кафе'],
 	},
 	{
@@ -20,7 +20,7 @@ export const POINTS = [
 	{
 		id: 'entertainments',
 		title: 'События',
-		imgSrc: `${PATH_TO_RESOURCES }/images/3d-glasses.svg`,
+		imgSrc: `${PATH_TO_RESOURCES }/images/vinyl.svg`,
 		subcategories: ['Ярмарки', 'Кино на открытом воздухе', 'Дискотека', 'Мастер-классы', 'Лекции', 'Гастрономический фестиваль'],
 	},
 	{
