@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
 
 import { POINTS } from '~/constants/points';
 import { MAIN_COLOR, BORDER_COLOR } from '~/constants/styles';
@@ -73,15 +74,18 @@ const CustomInput = styled.input`
 							key={ value.id } 
 							data-point-id={ value.id }
 							active={ this.activePoint === value.id }
-							onClick={ this.handlePointClick } >
+							onClick={ this.handlePointClick }
+						>
 							{ 
 								value.id === 'custom' ? 
+									(
 									<CustomInput 
 										type='text' 
 										placeholder={value.title} 
 										active={ this.activePoint === value.id }
 										onChange={ this.handleChangeCustomInput }
 									/> 
+									)
 									:
 									value.title
 							}
@@ -94,6 +98,10 @@ const CustomInput = styled.input`
 			</List>
 		);
 	}
+}
+
+Points.propTypes = {
+	store: PropTypes.objectOf(PropTypes.shape({})),
 }
 
 export default Points;

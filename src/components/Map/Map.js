@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MapGL, { Marker } from 'react-map-gl';
 import find from 'lodash/find';
+import PropTypes from 'prop-types';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { insertPoint, selectPoints } from '~/helpers/firebase';
@@ -42,7 +43,7 @@ const Map = (props) => {
 		longitude: LONGITUDE,
 		zoom: ZOOM,
 		minZoom: ZOOM,
-		attributionControl: false
+		attributionControl: false,
 	});
 
 	const [points, setPoints] = useState([]);
@@ -64,11 +65,11 @@ const Map = (props) => {
 		event.preventDefault();
 
 		if (store.pointType && store.userId) {
-			let newPoint = {
+			const newPoint = {
 				long: event.lngLat[0],
 				lat: event.lngLat[1],
 				type: store.pointType,
-				userId: store.userId
+				userId: store.userId,
 			};
 			setPoints([...points, newPoint]);
 			insertPoint(newPoint)
@@ -94,6 +95,7 @@ const Map = (props) => {
 					const validPoint = find(POINTS, p => _validatePointType(p.id, value.type));
 
 					return (validPoint ?
+						(
 						<Marker
 							key={ index }
 							longitude={ value.long }
@@ -106,6 +108,7 @@ const Map = (props) => {
 								/>
 							</MarketImage>
 						</Marker>
+						)
 						:
 						null
 					)
@@ -114,4 +117,9 @@ const Map = (props) => {
 		</MapGL>
 	);
 }
+
+Map.propTypes = {
+	store: PropTypes.objectOf(PropTypes.shape({})),
+}
+
 export default Map;

@@ -1,3 +1,5 @@
+/* global PATH_TO_RESOURCES */
+
 export const POINTS = [
 	{
 		id: 'sport',
@@ -23,5 +25,5 @@ export const POINTS = [
 		id: 'custom',
 		title: 'Другое',
 		imgSrc: `${PATH_TO_RESOURCES}/images/idea.svg`,
-	}
+	},
 ];

@@ -5,19 +5,22 @@
   "dependencies": {
     "firebase": "^5.8.2",
     "lodash": "^4.17.11",
+    "mapbox-gl": "^0.53.0",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
     "prop-types": "^15.6.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-map-gl": "^4.0.10",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^4.1.3"
   },
   "scripts": {
     "start": "npm run dev:webpack",
     "build": "npm run build:webpack",
     "dev:webpack": "cross-env NODE_ENV=dev webpack-dev-server --open --mode development",
-    "build:webpack": "cross-env NODE_ENV=prod webpack --mode production"
+    "build:webpack": "cross-env NODE_ENV=prod webpack --mode production",
+    "eslint": "eslint ./src/"
   },
   "pre-commit": [],
   "browserslist": [
@@ -37,11 +40,18 @@
     "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
     "html-webpack-plugin": "^3.2.0",
     "pre-commit": "^1.2.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
-    "styled-components": "^4.1.3",
     "svgo": "^1.1.1",
     "svgo-loader": "^2.2.0",
     "webpack": "^4.29.2",

@@ -1,3 +1,5 @@
+/* global PATH_TO_RESOURCES */
+
 import React from 'react';
 import styled from 'styled-components';
 
@@ -24,7 +26,7 @@ const Logo = () => (
 		target='_blank'
 		rel="noopener noreferrer"
 	>
-		<img src={`${ PATH_TO_RESOURCES }/images/corgi.svg`} />
+		<img src={`${ PATH_TO_RESOURCES }/images/corgi.svg`} alt='corgiLab logo' />
 	</StyledLogo>
 );
 

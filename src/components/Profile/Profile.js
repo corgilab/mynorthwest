@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
 
 import { saveState } from '~/helpers/localStorage';
 import { AGES, SEX, ANSWERS, ACTIONS } from '~/constants/profile';
@@ -52,7 +53,7 @@ const Button = styled.input`
 	@observable saveInputDisabled = false;
 
 	_getSubmitData = (target) => {
-		let checkedActions = [];
+		const checkedActions = [];
 		target.action.forEach(
 			(elem, index) => (
 				checkedActions[index] = elem.checked ? elem.value : null
@@ -79,7 +80,7 @@ const Button = styled.input`
 		insertProfileData(profileData)
 			.then( res => saveState('user_id', res.id) )
 			.then( res => store.setUserId(res) )
-			.catch( err => console.error(err) )
+			.catch( err => console.error(err) ) // eslint-disable-line no-console
 			.finally(() => this.saveInputDisabled = false);
 	}
 
@@ -92,13 +93,16 @@ const Button = styled.input`
 					{
 						AGES.map((value, index) => (
 							<Item key={ index }>
-								<input 
-									required
-									type='radio' 
-									name='age' 
-									value={ value }
-									id={`age${ index }`} />
-								<label htmlFor={`age${ index }`}>{ value }</label>
+								<label htmlFor={`age${ index }`}>
+									<input
+										required
+										type='radio'
+										name='age'
+										value={value}
+										id={`age${index}`}
+									/>
+									{ value }
+								</label>
 							</Item>
 						))
 					}
@@ -108,13 +112,16 @@ const Button = styled.input`
 					{
 						SEX.map((value, index) => (
 							<Item key={ index }>
-								<input
-									required
-									type='radio'
-									name='sex'
-									value={ value }
-									id={`sex${ index }`} />
-								<label htmlFor={`sex${index}`}>{ value }</label>
+								<label htmlFor={`sex${index}`}>
+									<input
+										required
+										type='radio'
+										name='sex'
+										value={value}
+										id={`sex${index}`}
+									/>
+									{ value }
+								</label>
 							</Item>
 						))
 					}
@@ -124,13 +131,16 @@ const Button = styled.input`
 					{
 						ANSWERS.map((value, index) => (
 							<Item key={ index }>
-								<input
-									required
-									type='radio'
-									name='answer'
-									value={ value }
-									id={`answer${ index }`} />
-								<label htmlFor={`answer${ index }`}>{ value }</label>
+								<label htmlFor={`answer${ index }`}>
+									<input
+										required
+										type='radio'
+										name='answer'
+										value={value}
+										id={`answer${index}`}
+									/>
+									{ value }
+								</label>
 							</Item>
 						))
 					}
@@ -139,13 +149,16 @@ const Button = styled.input`
 					<Title>На Северо-Западе Вы:</Title>
 					{
 						ACTIONS.map((value, index) => (
-							<Item key={index}>
-								<input
-									type='checkbox'
-									name='action'
-									value={ value }
-									id={`action${index}`} />
-								<label htmlFor={`action${index}`}>{value}</label>
+							<Item key={ index }>
+								<label htmlFor={`action${index}`}>
+									<input
+										type='checkbox'
+										name='action'
+										value={value}
+										id={`action${index}`}
+									/>
+									{value}
+								</label>
 							</Item>
 						))
 					}
@@ -154,10 +167,15 @@ const Button = styled.input`
 					name='save'
 					disabled={ this.saveInputDisabled }
 					type='submit'
-					value='Сохранить' />
+					value='Сохранить'
+				/>
 			</StyledProfile>
 		);
 	}
+}
+
+Profile.propTypes = {
+	store: PropTypes.objectOf(PropTypes.shape({})),
 }
 
 export default Profile;

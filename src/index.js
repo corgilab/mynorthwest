@@ -1,7 +1,8 @@
+/* global PATH_TO_RESOURCES */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
-import { MemoryRouter } from 'react-router-dom';
 
 import App from './components/App/App';
 
