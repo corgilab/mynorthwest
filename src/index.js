@@ -23,6 +23,15 @@ const GlobalStyle = createGlobalStyle`
 		font-display: block;
 	}
 
+	@keyframes cloud {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(.96);
+        }
+    }
+
 	body {
 		margin: 0;
 		padding: 0;

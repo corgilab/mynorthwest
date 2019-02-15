@@ -32,6 +32,19 @@ const Row = styled.li`
 	}
 `;
 
+const ExtraList = styled(List)`
+	padding-left: 10px;
+	font-size: 0.8rem;
+`;
+
+const ExtraRow = styled.li`
+	position: relative;
+	height: 25px;
+	transition: all .25s linear;
+	cursor: pointer;
+	font-weight: bold;
+`;
+
 const Image = styled.img`
 	width: 50px;
 	padding: 5px;
@@ -70,29 +83,54 @@ const CustomInput = styled.input`
 				<Title>Чего вам не хватает?</Title>
 				{
 					POINTS.map( value => (
-						<Row
-							key={ value.id } 
-							data-point-id={ value.id }
-							active={ this.activePoint === value.id }
-							onClick={ this.handlePointClick }
-						>
-							{ 
-								value.id === 'custom' ? 
-									(
-									<CustomInput 
-										type='text' 
-										placeholder={value.title} 
-										active={ this.activePoint === value.id }
-										onChange={ this.handleChangeCustomInput }
-									/> 
-									)
-									:
-									value.title
+						<React.Fragment key={value.id}>
+							<Row
+								data-point-id={ value.id }
+								active={ this.activePoint === value.id }
+								onClick={ this.handlePointClick } >
+								{ 
+									value.id === 'custom' ? 
+										(
+										<CustomInput 
+											type='text' 
+											placeholder={value.title} 
+											active={ this.activePoint === value.id }
+											onChange={ this.handleChangeCustomInput }
+										/> 
+										)
+										:
+										value.title
+								}
+								<Image 
+									src={ value.imgSrc } 
+								/>
+							</Row>
+							{
+								this.activePoint === value.id && value.id !== 'custom' &&
+								(
+								<ExtraList
+									data-point-id={value.id}
+									active={this.activePoint === value.id}
+								>
+									{
+										value.subcategories.map( (item, index) => (
+											<ExtraRow key={`${value.id}_${index}`}>
+												<label htmlFor={`${value.id}_${index}`}>
+													<input
+														type='radio'
+														name={value.id}
+														value={item}
+														id={`${value.id}_${index}`}
+													/>
+													{item}
+												</label>
+											</ExtraRow>
+										))
+									}
+								</ExtraList>
+								)
 							}
-							<Image 
-								src={ value.imgSrc } 
-							/>
-						</Row>
+						</React.Fragment>
 					))
 				}
 			</List>

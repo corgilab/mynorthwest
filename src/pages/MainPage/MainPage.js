@@ -2,13 +2,15 @@
 
 import React from 'react';
 import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
+
 import { MAP_ROUTE } from '~/constants/routers';
 import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
+import AnimationBackground from './AnimationBackground';
 
 const Page = styled.main`
-	background-image: url('${PATH_TO_RESOURCES}/images/URBAN.png');
+	overflow: hidden;
+	background-image: linear-gradient(135deg, #f1f0fb 0%,#7db9e8 100%);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -52,6 +54,7 @@ const Button = styled(Link)`
 const MainPage = () => {
 	return (
 		<Page>
+			<AnimationBackground />
 			<Content>
 				<Title>
 					МойСевероЗапад.рф
