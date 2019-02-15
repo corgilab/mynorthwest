@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
 
 import Profile from '~/components/Profile/Profile';
 import Points from '~/components/Points/Points';
 import { MOBILE_SIZE } from '~/constants/common';
 import { BACKGROUND_COLOR } from '~/constants/styles';
-import { loadState } from '~/helpers/localStorage';
 import { screenBiggerThan } from '~/helpers/common';
 
 import Blind from './Blind/Blind';
@@ -62,4 +62,9 @@ const StyledPanel = styled.aside`
 		);
 	}
 }
+
+ControlPanel.propTypes = {
+	store: PropTypes.objectOf(PropTypes.shape({})),
+}
+
 export default ControlPanel;

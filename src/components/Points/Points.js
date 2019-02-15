@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
 
 import { POINTS } from '~/constants/points';
 import { MAIN_COLOR, BORDER_COLOR } from '~/constants/styles';
@@ -88,15 +89,18 @@ const CustomInput = styled.input`
 							<Row
 								data-point-id={ value.id }
 								active={ this.activePoint === value.id }
-								onClick={ this.handlePointClick } >
+								onClick={ this.handlePointClick }
+							>
 								{ 
 									value.id === 'custom' ? 
+										(
 										<CustomInput 
 											type='text' 
 											placeholder={value.title} 
 											active={ this.activePoint === value.id }
 											onChange={ this.handleChangeCustomInput }
 										/> 
+										)
 										:
 										value.title
 								}
@@ -106,6 +110,7 @@ const CustomInput = styled.input`
 							</Row>
 							{
 								this.activePoint === value.id && value.id !== 'custom' &&
+								(
 								<ExtraList
 									data-point-id={value.id}
 									active={this.activePoint === value.id}
@@ -113,17 +118,20 @@ const CustomInput = styled.input`
 									{
 										value.subcategories.map( (item, index) => (
 											<ExtraRow key={`${value.id}_${index}`}>
-												<input
-													type='radio'
-													name={value.id}
-													value={item}
-													id={`${value.id}_${index}`}
-												/>
-												<label htmlFor={`${value.id}_${index}`}>{item}</label>
+												<label htmlFor={`${value.id}_${index}`}>
+													<input
+														type='radio'
+														name={value.id}
+														value={item}
+														id={`${value.id}_${index}`}
+													/>
+													{item}
+												</label>
 											</ExtraRow>
 										))
 									}
 								</ExtraList>
+								)
 							}
 						</React.Fragment>
 					))
@@ -131,6 +139,10 @@ const CustomInput = styled.input`
 			</List>
 		);
 	}
+}
+
+Points.propTypes = {
+	store: PropTypes.objectOf(PropTypes.shape({})),
 }
 
 export default Points;

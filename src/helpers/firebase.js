@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-import 'firebase/app';
 import 'firebase/firestore';
 import * as db from '~/constants/firebase';
 
@@ -9,7 +8,7 @@ const firestore = firebase.initializeApp({
 		databaseURL: db.DATABASE_URL,
 		projectId: db.PROJECT_ID,
 		storageBucket: db.STORAGE_BUCKET,
-		messagingSenderId: db.MESSAGING_SENDER_ID
+		messagingSenderId: db.MESSAGING_SENDER_ID,
 	})
 	.firestore();
 
@@ -27,8 +26,8 @@ export const insertProfileData = (data) => (
 
 export const isUserExist = (id) => (
 	firestore.collection('users').doc(id).get()
-		.then(doc => doc.exists ? true : false)
-		.catch(err => console.error(err))
+		.then(doc => doc.exists)
+		.catch(err => console.error(err)) // eslint-disable-line no-console
 );
 
 export const selectProfileData = (id) => {
@@ -37,13 +36,13 @@ export const selectProfileData = (id) => {
 	user.get()
 		.then( doc => {
 			if ( doc.exists ) {
-				console.log(doc.data());
+				console.log(doc.data()); // eslint-disable-line no-console
 			}
 			else {
 				throw 'Document isn\'t exists';
 			}
 		})
-		.catch( err => console.error(err) );
+		.catch( err => console.error(err) ); // eslint-disable-line no-console
 };
 
 export const insertPoint = (data) => (
@@ -52,7 +51,7 @@ export const insertPoint = (data) => (
 
 export const selectPoints = () => {
 	const points = firestore.collection('points');
-	let userPoints = [];
+	const userPoints = [];
 	return points.get()
 		.then( snapshot => {
 			snapshot.docs.forEach(doc => {
@@ -67,5 +66,5 @@ export const selectPoints = () => {
 			});
 			return userPoints;
 		})
-		.catch( err => console.error(err) );
+		.catch( err => console.error(err) ); // eslint-disable-line no-console
 };

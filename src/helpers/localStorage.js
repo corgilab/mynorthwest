@@ -4,7 +4,7 @@ export const loadState = (name) => {
 		return serializedState ? JSON.parse(serializedState) : null;
 	}
 	catch (err) {
-		console.log(err);
+		console.log(err); // eslint-disable-line no-console
 		return null;
 	}
 }
@@ -16,7 +16,7 @@ export const saveState = (name, state) => {
 		return state;
 	}
 	catch (err) {
-		console.log(err);
+		console.log(err); // eslint-disable-line no-console
 		return null;
 	}
 }

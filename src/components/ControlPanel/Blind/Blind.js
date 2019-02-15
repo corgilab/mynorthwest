@@ -1,5 +1,8 @@
+/* global PATH_TO_RESOURCES */
+
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { MOBILE_SIZE } from '~/constants/common';
 import { BACKGROUND_COLOR } from '~/constants/styles';
@@ -27,11 +30,17 @@ const Arrow = styled.img`
 `;
 
 const Blind = (props) => {
+	const { isOpen, handleBlindClick } = props;
     return (
-		<StyledBlind isOpen={ props.isOpen } onClick={ props.handleBlindClick }>
-            <Arrow isOpen={ props.isOpen } src={`${ PATH_TO_RESOURCES }/images/arrow.svg`} />
-        </StyledBlind>
+		<StyledBlind isOpen={ isOpen } onClick={ handleBlindClick }>
+			<Arrow isOpen={ isOpen } src={`${ PATH_TO_RESOURCES }/images/arrow.svg`} />
+		</StyledBlind>
     );
+}
+
+Blind.propTypes = {
+	isOpen: PropTypes.bool,
+	handleBlindClick: PropTypes.func,
 }
 
 export default Blind;
