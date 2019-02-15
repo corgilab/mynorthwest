@@ -12,9 +12,9 @@ const List = styled.ul`
 	padding: 0;
 `;
 
-const Title = styled.h3`
+const Title = styled.h4`
 	margin: 0 0 20px;
-	font-weight: bold;
+	font-weight: normal;
 `;
 
 const Row = styled.li`
@@ -79,7 +79,9 @@ const CustomInput = styled.input`
 	render() {
 		return (
 			<List>
-				<Title>Чего вам не хватает?</Title>
+				<Title>
+					Нужно выбрать категорию и кликнуть на карте там, где поставить метку. Удалить поставленное пока не получится.
+				</Title>
 				{
 					POINTS.map( value => (
 						<React.Fragment key={value.id}>
