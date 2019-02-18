@@ -18,18 +18,20 @@ const Page = styled.main`
 
 const Content = styled.div`
 	position: absolute;
-	top: 150px;
+	top: 100px;
 	left: 250px;
 `;
 
 const Title = styled.h1`
-	margin-bottom: 50px;
+	font-size: 36px;
+	margin-bottom: 20px;
 `;
 
 const Text = styled.div`
-	width: 400px;
+	width: 500px;
+	font-size: 20px;
 	line-height: 2rem;
-	margin-bottom: 75px;
+	margin-bottom: 50px;
 `;
 
 const Button = styled(Link)`
@@ -55,11 +57,12 @@ const MainPage = () => {
 			<Content>
 				<Title>МойСевероЗапад.рф</Title>
 				<Text>
-					Платформа - эксперимент для сбора идей по улучшению Северо-Западного района Курска.
-					<br />
-					Просто добавь свою идею на общую карту.
+					Интерактивный портал по сбору идей для формирования комфортных общественных пространств
+					Северо-Западного района города Курска. Просто добавь свою идею на общую карту!
 				</Text>
-				<Button to={MAP_ROUTE}>Открыть карту</Button>
+				<Button to={ MAP_ROUTE }>
+					Добавить идею!
+				</Button>
 			</Content>
 		</Page>
 	);
