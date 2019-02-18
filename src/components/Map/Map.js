@@ -5,10 +5,11 @@ import find from 'lodash/find';
 import PropTypes from 'prop-types';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { insertPoint, selectPoints } from '~/helpers/firebase';
+import { insertPoint, selectPoints, deletePoint } from '~/helpers/firebase';
 import { TOKEN, STYLE, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { MAIN_COLOR } from '~/constants/styles';
 import { POINTS } from '~/constants/points';
+import store from '~/store/store';
 
 const MarketImage = styled.span`
 	pointer-events: none;
@@ -35,6 +36,18 @@ const Icon = styled.img`
 	padding: 5px;
 	background-color: ${MAIN_COLOR};
 	border-radius: 5px;
+`;
+
+const MarkerDelete = styled.span`
+	position: absolute;
+	right: -3px;
+	top: -30px;
+	height: 13px;
+	width: 13px;
+	background: url('${PATH_TO_RESOURCES}/images/close.svg') no-repeat;
+	background-size: cover;
+	pointer-events: auto;
+	cursor: pointer;
 `;
 
 const Map = props => {
@@ -75,6 +88,13 @@ const Map = props => {
 		}
 	};
 
+	const handleDelMarker = (ind, point, event) => {
+		event.preventDefault();
+
+		deletePoint(point);
+		points.splice(ind, 1);
+	};
+
 	const _validatePointType = (id, type) => id === type || id === type.split('_')[0];
 
 	return (
@@ -93,6 +113,9 @@ const Map = props => {
 				return validPoint ? (
 					<Marker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
 						<MarketImage>
+							{value.userId === store.userId ? (
+								<MarkerDelete onClick={e => handleDelMarker(index, value, e)} />
+							) : null}
 							<Icon src={validPoint && validPoint.imgSrc} />
 						</MarketImage>
 					</Marker>
