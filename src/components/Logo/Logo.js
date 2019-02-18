@@ -20,13 +20,8 @@ const StyledLogo = styled.a`
 `;
 
 const Logo = () => (
-	<StyledLogo 
-		href='http://corgilab.ru/' 
-		title='CorgiLab' 
-		target='_blank'
-		rel="noopener noreferrer"
-	>
-		<img src={`${ PATH_TO_RESOURCES }/images/corgi.svg`} alt='corgiLab logo' />
+	<StyledLogo href='http://corgilab.ru/' title='CorgiLab' target='_blank' rel='noopener noreferrer'>
+		<img src={`${PATH_TO_RESOURCES}/images/corgi.svg`} alt='corgiLab logo' />
 	</StyledLogo>
 );
 

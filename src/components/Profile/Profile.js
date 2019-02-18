@@ -9,9 +9,7 @@ import { AGES, SEX, ANSWERS, ACTIONS } from '~/constants/profile';
 import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
 import { insertProfileData } from '~/helpers/firebase';
 
-const StyledProfile = styled.form`
-
-`;
+const StyledProfile = styled.form``;
 
 const Header = styled.h3`
 	margin: 0 0 20px;
@@ -38,8 +36,8 @@ const Item = styled.li`
 const Button = styled.input`
 	display: block;
 	height: 40px;
-	color: ${ FONT_COLOR };
-	background-color: ${ MAIN_COLOR };
+	color: ${FONT_COLOR};
+	background-color: ${MAIN_COLOR};
 	font-family: inherit;
 	font-size: 14px;
 	width: 80%;
@@ -48,16 +46,13 @@ const Button = styled.input`
 	font-weight: bold;
 `;
 
-@observer class Profile extends React.Component {
+@observer
+class Profile extends React.Component {
 	@observable saveInputDisabled = false;
 
-	_getSubmitData = (target) => {
+	_getSubmitData = target => {
 		const checkedActions = [];
-		target.action.forEach(
-			(elem, index) => (
-				checkedActions[index] = elem.checked ? elem.value : null
-			)
-		);
+		target.action.forEach((elem, index) => (checkedActions[index] = elem.checked ? elem.value : null));
 
 		return {
 			age: target.age.value,
@@ -65,109 +60,73 @@ const Button = styled.input`
 			answer: target.answer.value,
 			action: checkedActions,
 		};
-	}
+	};
 
 	@action
-	handleSubmit = (event) => {
+	handleSubmit = event => {
 		const profileData = this._getSubmitData(event.target);
 		const { store } = this.props;
-		
+
 		event.preventDefault();
 		this.saveInputDisabled = true;
 
 		// Add profile data to Firebase and save user's id in localStorage
 		insertProfileData(profileData)
-			.then( res => saveState('user_id', res.id) )
-			.then( res => store.setUserId(res) )
-			.catch( err => console.error(err) ) // eslint-disable-line no-console
-			.finally(() => this.saveInputDisabled = false);
-	}
+			.then(res => saveState('user_id', res.id))
+			.then(res => store.setUserId(res))
+			.catch(err => console.error(err)) // eslint-disable-line no-console
+			.finally(() => (this.saveInputDisabled = false));
+	};
 
-	render(){
+	render() {
 		return (
-			<StyledProfile onSubmit={ this.handleSubmit }>
+			<StyledProfile onSubmit={this.handleSubmit}>
 				<Header>Пожалуйста заполните анкету</Header>
 				<List>
 					<Title>Ваш Возраст</Title>
-					{
-						AGES.map((value, index) => (
-							<Item key={ index }>
-								<label htmlFor={`age${ index }`}>
-									<input
-										required
-										type='radio'
-										name='age'
-										value={value}
-										id={`age${index}`}
-									/>
-									{ value }
-								</label>
-							</Item>
-						))
-					}
+					{AGES.map((value, index) => (
+						<Item key={index}>
+							<label htmlFor={`age${index}`}>
+								<input required type='radio' name='age' value={value} id={`age${index}`} />
+								{value}
+							</label>
+						</Item>
+					))}
 				</List>
 				<List>
 					<Title>Пол</Title>
-					{
-						SEX.map((value, index) => (
-							<Item key={ index }>
-								<label htmlFor={`sex${index}`}>
-									<input
-										required
-										type='radio'
-										name='sex'
-										value={value}
-										id={`sex${index}`}
-									/>
-									{ value }
-								</label>
-							</Item>
-						))
-					}
+					{SEX.map((value, index) => (
+						<Item key={index}>
+							<label htmlFor={`sex${index}`}>
+								<input required type='radio' name='sex' value={value} id={`sex${index}`} />
+								{value}
+							</label>
+						</Item>
+					))}
 				</List>
 				<List>
 					<Title>Вы проживаете на территории Северо-Запада?</Title>
-					{
-						ANSWERS.map((value, index) => (
-							<Item key={ index }>
-								<label htmlFor={`answer${ index }`}>
-									<input
-										required
-										type='radio'
-										name='answer'
-										value={value}
-										id={`answer${index}`}
-									/>
-									{ value }
-								</label>
-							</Item>
-						))
-					}
+					{ANSWERS.map((value, index) => (
+						<Item key={index}>
+							<label htmlFor={`answer${index}`}>
+								<input required type='radio' name='answer' value={value} id={`answer${index}`} />
+								{value}
+							</label>
+						</Item>
+					))}
 				</List>
 				<List>
 					<Title>На Северо-Западе Вы:</Title>
-					{
-						ACTIONS.map((value, index) => (
-							<Item key={ index }>
-								<label htmlFor={`action${index}`}>
-									<input
-										type='checkbox'
-										name='action'
-										value={value}
-										id={`action${index}`}
-									/>
-									{value}
-								</label>
-							</Item>
-						))
-					}
+					{ACTIONS.map((value, index) => (
+						<Item key={index}>
+							<label htmlFor={`action${index}`}>
+								<input type='checkbox' name='action' value={value} id={`action${index}`} />
+								{value}
+							</label>
+						</Item>
+					))}
 				</List>
-				<Button 
-					name='save'
-					disabled={ this.saveInputDisabled }
-					type='submit'
-					value='Сохранить'
-				/>
+				<Button name='save' disabled={this.saveInputDisabled} type='submit' value='Сохранить' />
 			</StyledProfile>
 		);
 	}
@@ -175,6 +134,6 @@ const Button = styled.input`
 
 Profile.propTypes = {
 	store: PropTypes.objectOf(PropTypes.shape({})),
-}
+};
 
 export default Profile;

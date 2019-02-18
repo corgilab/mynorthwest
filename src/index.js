@@ -9,7 +9,7 @@ import App from './components/App/App';
 const GlobalStyle = createGlobalStyle`
 	@font-face {
 		font-family: GothamPro;
-		src: url('${ PATH_TO_RESOURCES }/fonts/GothamPro-Light.woff') format('woff');
+		src: url('${PATH_TO_RESOURCES}/fonts/GothamPro-Light.woff') format('woff');
 		font-weight: normal;
   	font-style: normal;
 		font-display: block;
@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
 	@font-face {
 		font-family: GothamPro;
-		src: url('${ PATH_TO_RESOURCES }/fonts/GothamPro.woff') format('woff');
+		src: url('${PATH_TO_RESOURCES}/fonts/GothamPro.woff') format('woff');
 		font-weight: bold;
   	font-style: normal;
 		font-display: block;
@@ -46,12 +46,10 @@ const GlobalStyle = createGlobalStyle`
 	}
 `;
 
-
 ReactDOM.render(
 	<>
 		<App />
 		<GlobalStyle />
-	</>
-	,
+	</>,
 	document.getElementById('root')
 );

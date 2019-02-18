@@ -59,16 +59,16 @@ const ImageLittleEllipse2 = styled(Image)`
 `;
 
 const AnimationBackground = () => (
-    <>
-        <ImageBack1 />
-        <ImageBack2 />
-        <ImageBack3 />
-        <ImageBack4 />
-        <ImageBack5 />
-        <ImageBack6 />
-        <ImageLittleEllipse1 />
-        <ImageLittleEllipse2 />
-    </>
+	<>
+		<ImageBack1 />
+		<ImageBack2 />
+		<ImageBack3 />
+		<ImageBack4 />
+		<ImageBack5 />
+		<ImageBack6 />
+		<ImageLittleEllipse1 />
+		<ImageLittleEllipse2 />
+	</>
 );
 
 export default AnimationBackground;
