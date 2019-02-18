@@ -40,10 +40,12 @@ const Icon = styled.img`
 
 const MarkerDelete = styled.span`
 	position: absolute;
-	right: 0;
-	height: 10px;
-	width: 10px;
-	background-color: #000;
+	right: -3px;
+	top: -30px;
+	height: 13px;
+	width: 13px;
+	background: url('${PATH_TO_RESOURCES}/images/close.svg') no-repeat;
+	background-size: cover;
 	pointer-events: auto;
 	cursor: pointer;
 `;
