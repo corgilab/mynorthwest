@@ -68,16 +68,18 @@ export const selectPoints = () => {
 		.catch(err => console.error(err)); // eslint-disable-line no-console
 };
 
-export const deletePoint = (point) => {
-	const deleteQuery = firestore.collection('points')
-		.where("long", "==", point.long)
-		.where("lat", "==", point.lat);
+export const deletePoint = point => {
+	const deleteQuery = firestore
+		.collection('points')
+		.where('long', '==', point.long)
+		.where('lat', '==', point.lat);
 
-	deleteQuery.get()
-		.then( querySnapshot => {
-			querySnapshot.forEach( doc => {
+	deleteQuery
+		.get()
+		.then(querySnapshot => {
+			querySnapshot.forEach(doc => {
 				doc.ref.delete();
-			})
+			});
 		})
-		.catch( err => console.error(err) );
-}
+		.catch(err => console.error(err)); // eslint-disable-line no-console
+};
