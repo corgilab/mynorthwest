@@ -1,20 +1,8 @@
-export const AGES = [
-	'До 17 лет',
-	'18-25 лет',
-	'26-35 лет',
-	'36-55 лет',
-	'Старше 56 лет',
-];
+export const AGES = ['До 17 лет', '18-25 лет', '26-35 лет', '36-55 лет', 'Старше 56 лет'];
 
-export const SEX = [
-	'Мужской',
-	'Женский',
-];
+export const SEX = ['Мужской', 'Женский'];
 
-export const ANSWERS = [
-	'Да',
-	'Нет',
-];
+export const ANSWERS = ['Да', 'Нет'];
 
 export const ACTIONS = [
 	'Учитесь',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import store from '~/store/store'
+import store from '~/store/store';
 import Map from '~/components/Map/Map';
 import ControlPanel from '~/components/ControlPanel/ControlPanel';
 import Logo from '~/components/Logo/Logo';
@@ -10,11 +10,11 @@ const MapPage = () => {
 	return (
 		<>
 			<Navigation />
-			<ControlPanel store={ store } />
-			<Map store={ store } />
+			<ControlPanel store={store} />
+			<Map store={store} />
 			<Logo />
 		</>
 	);
-}
+};
 
 export default MapPage;

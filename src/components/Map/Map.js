@@ -24,7 +24,7 @@ const MarketImage = styled.span`
 		left: calc(50% - 10px);
 		top: 10px;
 		border-style: solid;
-		border-color: ${ MAIN_COLOR } transparent transparent transparent;
+		border-color: ${MAIN_COLOR} transparent transparent transparent;
 		border-width: 10px;
 	}
 `;
@@ -33,11 +33,11 @@ const Icon = styled.img`
 	box-sizing: border-box;
 	width: 40px;
 	padding: 5px;
-	background-color: ${ MAIN_COLOR };
+	background-color: ${MAIN_COLOR};
 	border-radius: 5px;
 `;
 
-const Map = (props) => {
+const Map = props => {
 	const [viewport, setViewport] = useState({
 		latitude: LATITUDE,
 		longitude: LONGITUDE,
@@ -49,19 +49,18 @@ const Map = (props) => {
 	const [points, setPoints] = useState([]);
 
 	useEffect(() => {
-		if (!points.length){
-			selectPoints()
-				.then(res => setPoints(res));
+		if (!points.length) {
+			selectPoints().then(res => setPoints(res));
 		}
 	});
 
-	const updateMap = (viewport) => {
+	const updateMap = viewport => {
 		setViewport(viewport);
 	};
 
-	const handleAddPoint = (event) => {
+	const handleAddPoint = event => {
 		const { store } = props;
-		
+
 		event.preventDefault();
 
 		if (store.pointType && store.userId) {
@@ -72,54 +71,39 @@ const Map = (props) => {
 				userId: store.userId,
 			};
 			setPoints([...points, newPoint]);
-			insertPoint(newPoint)
+			insertPoint(newPoint);
 		}
 	};
 
-	const _validatePointType = (id, type) => (
-		id === type || id === type.split('_')[0]
-	);
+	const _validatePointType = (id, type) => id === type || id === type.split('_')[0];
 
 	return (
 		<MapGL
-			{ ...viewport }
+			{...viewport}
 			width='100vw'
 			height='100vh'
-			mapboxApiAccessToken={ TOKEN }
-			mapStyle={ STYLE }
-			onViewportChange={ updateMap }
-			onClick={ handleAddPoint }
+			mapboxApiAccessToken={TOKEN}
+			mapStyle={STYLE}
+			onViewportChange={updateMap}
+			onClick={handleAddPoint}
 		>
-			{
-				points.map((value, index) => {
-					const validPoint = find(POINTS, p => _validatePointType(p.id, value.type));
+			{points.map((value, index) => {
+				const validPoint = find(POINTS, p => _validatePointType(p.id, value.type));
 
-					return (validPoint ?
-						(
-						<Marker
-							key={ index }
-							longitude={ value.long }
-							latitude={ value.lat }
-							draggable={ false }
-						>
-							<MarketImage>
-								<Icon
-									src={ validPoint && validPoint.imgSrc }
-								/>
-							</MarketImage>
-						</Marker>
-						)
-						:
-						null
-					)
-				})
-			}
+				return validPoint ? (
+					<Marker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
+						<MarketImage>
+							<Icon src={validPoint && validPoint.imgSrc} />
+						</MarketImage>
+					</Marker>
+				) : null;
+			})}
 		</MapGL>
 	);
-}
+};
 
 Map.propTypes = {
 	store: PropTypes.objectOf(PropTypes.shape({})),
-}
+};
 
 export default Map;

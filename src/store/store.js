@@ -1,19 +1,19 @@
 import { observable, action } from 'mobx';
-import { loadState } from "~/helpers/localStorage";
+import { loadState } from '~/helpers/localStorage';
 import { POINTS } from '~/constants/points';
 
 class Store {
-    @observable userId = loadState('user_id');
-    
-    @observable pointType = POINTS[0].id;
+	@observable userId = loadState('user_id');
 
-    @action setUserId(id) {
-        return this.userId = id;
-    }
+	@observable pointType = POINTS[0].id;
 
-    @action setPointType(type) {
-        return this.pointType = type;
-    }
+	@action setUserId(id) {
+		return (this.userId = id);
+	}
+
+	@action setPointType(type) {
+		return (this.pointType = type);
+	}
 }
 
 export default new Store();

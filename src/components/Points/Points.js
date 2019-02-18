@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
@@ -24,11 +24,11 @@ const Row = styled.li`
 	align-items: center;
 	margin: 5px 0;
 	cursor: pointer;
-	font-weight: ${ props => props.active ? 'bold' : 'normal'};
+	font-weight: ${props => (props.active ? 'bold' : 'normal')};
 	text-align: center;
 
 	img {
-		filter: ${ props => props.active ? 'grayscale(0)' : 'grayscale(100%)'};
+		filter: ${props => (props.active ? 'grayscale(0)' : 'grayscale(100%)')};
 	}
 `;
 
@@ -40,7 +40,7 @@ const ExtraList = styled(List)`
 const ExtraRow = styled.li`
 	position: relative;
 	height: 25px;
-	transition: all .25s linear;
+	transition: all 0.25s linear;
 	cursor: pointer;
 	font-weight: bold;
 `;
@@ -48,21 +48,22 @@ const ExtraRow = styled.li`
 const Image = styled.img`
 	width: 50px;
 	padding: 5px;
-	background-color: ${ MAIN_COLOR };
+	background-color: ${MAIN_COLOR};
 	border-radius: 5px;
 `;
 
 const CustomInput = styled.input`
 	height: 25px;
 	padding-left: 5px;
-	border: 2px solid ${ props => props.active ? MAIN_COLOR : BORDER_COLOR};
+	border: 2px solid ${props => (props.active ? MAIN_COLOR : BORDER_COLOR)};
 `;
 
-@observer class Points extends Component {
+@observer
+class Points extends Component {
 	@observable activePoint = POINTS[0].id;
 
 	@action
-	handlePointClick = (event) => {
+	handlePointClick = event => {
 		const { store } = this.props;
 
 		event.preventDefault();
@@ -71,71 +72,57 @@ const CustomInput = styled.input`
 		store.setPointType(this.activePoint);
 	};
 
-	handleChangeCustomInput = (event) => {
+	handleChangeCustomInput = event => {
 		const { store } = this.props;
 		const inputValue = event.currentTarget.value;
 		store.setPointType(`custom_${inputValue}`);
-	}
+	};
 
 	render() {
 		return (
 			<List>
 				<Title>
-					Нужно выбрать категорию и кликнуть на карте там, где поставить метку. Удалить поставленное пока не получится.
+					Нужно выбрать категорию и кликнуть на карте там, где поставить метку. Удалить поставленное пока не
+					получится.
 				</Title>
-				{
-					POINTS.map( value => (
-						<React.Fragment key={value.id}>
-							<Row
-								data-point-id={ value.id }
-								active={ this.activePoint === value.id }
-								onClick={ this.handlePointClick }
-							>
-								{ 
-									value.id === 'custom' ? 
-										(
-										<CustomInput 
-											type='text' 
-											placeholder={value.title} 
-											active={ this.activePoint === value.id }
-											onChange={ this.handleChangeCustomInput }
-										/> 
-										)
-										:
-										value.title
-								}
-								<Image 
-									src={ value.imgSrc } 
-								/>
-							</Row>
-							{
-								this.activePoint === value.id && value.id !== 'custom' &&
-								(
-								<ExtraList
-									data-point-id={value.id}
+				{POINTS.map(value => (
+					<React.Fragment key={value.id}>
+						<Row
+							data-point-id={value.id}
+							active={this.activePoint === value.id}
+							onClick={this.handlePointClick}
+						>
+							{value.id === 'custom' ? (
+								<CustomInput
+									type='text'
+									placeholder={value.title}
 									active={this.activePoint === value.id}
-								>
-									{
-										value.subcategories.map( (item, index) => (
-											<ExtraRow key={`${value.id}_${index}`}>
-												<label htmlFor={`${value.id}_${index}`}>
-													<input
-														type='radio'
-														name={value.id}
-														value={item}
-														id={`${value.id}_${index}`}
-													/>
-													{item}
-												</label>
-											</ExtraRow>
-										))
-									}
-								</ExtraList>
-								)
-							}
-						</React.Fragment>
-					))
-				}
+									onChange={this.handleChangeCustomInput}
+								/>
+							) : (
+								value.title
+							)}
+							<Image src={value.imgSrc} />
+						</Row>
+						{this.activePoint === value.id && value.id !== 'custom' && (
+							<ExtraList data-point-id={value.id} active={this.activePoint === value.id}>
+								{value.subcategories.map((item, index) => (
+									<ExtraRow key={`${value.id}_${index}`}>
+										<label htmlFor={`${value.id}_${index}`}>
+											<input
+												type='radio'
+												name={value.id}
+												value={item}
+												id={`${value.id}_${index}`}
+											/>
+											{item}
+										</label>
+									</ExtraRow>
+								))}
+							</ExtraList>
+						)}
+					</React.Fragment>
+				))}
 			</List>
 		);
 	}
@@ -143,6 +130,6 @@ const CustomInput = styled.input`
 
 Points.propTypes = {
 	store: PropTypes.objectOf(PropTypes.shape({})),
-}
+};
 
 export default Points;
