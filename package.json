@@ -22,7 +22,7 @@
     "build:webpack": "cross-env NODE_ENV=prod webpack --mode production && npm run svg:compress",
     "eslint": "eslint ./src/",
     "svg:compress": "svgo -f ./resources/images",
-    "prettier": "prettier --write './src/**/*.js'"
+    "prettier": "prettier --write \"./src/**/*.js\""
   },
   "browserslist": [
     ">0.2%",
