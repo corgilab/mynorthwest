@@ -1,7 +1,10 @@
+/* global PATH_TO_RESOURCES */
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import MapGL, { Marker } from 'react-map-gl';
 import find from 'lodash/find';
+import without from 'lodash/without';
 import PropTypes from 'prop-types';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -9,7 +12,6 @@ import { insertPoint, selectPoints, deletePoint } from '~/helpers/firebase';
 import { TOKEN, STYLE, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { MAIN_COLOR } from '~/constants/styles';
 import { POINTS } from '~/constants/points';
-import store from '~/store/store';
 
 const MarketImage = styled.span`
 	pointer-events: none;
@@ -51,6 +53,8 @@ const MarkerDelete = styled.span`
 `;
 
 const Map = props => {
+	const { store } = props;
+
 	const [viewport, setViewport] = useState({
 		latitude: LATITUDE,
 		longitude: LONGITUDE,
@@ -88,11 +92,11 @@ const Map = props => {
 		}
 	};
 
-	const handleDelMarker = (ind, point, event) => {
+	const handleDeleteMarker = point => event => {
 		event.preventDefault();
 
+		setPoints([...without(points, point)]);
 		deletePoint(point);
-		points.splice(ind, 1);
 	};
 
 	const _validatePointType = (id, type) => id === type || id === type.split('_')[0];
@@ -114,7 +118,7 @@ const Map = props => {
 					<Marker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
 						<MarketImage>
 							{value.userId === store.userId ? (
-								<MarkerDelete onClick={e => handleDelMarker(index, value, e)} />
+								<MarkerDelete onClick={handleDeleteMarker(value)} />
 							) : null}
 							<Icon src={validPoint && validPoint.imgSrc} />
 						</MarketImage>
