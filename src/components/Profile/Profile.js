@@ -81,7 +81,7 @@ class Profile extends React.Component {
 	render() {
 		return (
 			<StyledProfile onSubmit={this.handleSubmit}>
-				<Header>Пожалуйста заполните анкету</Header>
+				<Header>Заполните анкету,  чтобы добавить идею на карте</Header>
 				<List>
 					<Title>Ваш Возраст</Title>
 					{AGES.map((value, index) => (
