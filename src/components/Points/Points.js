@@ -72,6 +72,11 @@ class Points extends Component {
 		store.setPointType(this.activePoint);
 	};
 
+	handleSubcategoryClick = event => {
+		const { store } = this.props;
+		store.setPointType(`${this.activePoint}_${event.currentTarget.dataset.subcategoryName}`);
+	};
+
 	handleChangeCustomInput = event => {
 		const { store } = this.props;
 		const inputValue = event.currentTarget.value;
@@ -107,7 +112,11 @@ class Points extends Component {
 						{this.activePoint === value.id && value.id !== 'custom' && (
 							<ExtraList data-point-id={value.id} active={this.activePoint === value.id}>
 								{value.subcategories.map((item, index) => (
-									<ExtraRow key={`${value.id}_${index}`}>
+									<ExtraRow
+										data-subcategory-name={item}
+										key={`${value.id}_${index}`}
+										onClick={this.handleSubcategoryClick}
+									>
 										<label htmlFor={`${value.id}_${index}`}>
 											<input
 												type='radio'
