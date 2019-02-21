@@ -72,7 +72,7 @@ const Footer = styled.div`
 	left: 250px;
 
 	@media (max-width: ${`${MOBILE_SIZE}px`}) {
-		top: 40px;
+		bottom: 10px;
 		left: 20px;
 	}
 `;
@@ -101,7 +101,8 @@ const MainPage = () => {
 				<br />
 				Разработано: <StyledLink to='https://corgilab.ru'>КоргиЛаб</StyledLink>
 				<br />
-				Дизайн иллюстрации: <StyledLink to='http://www.behance.net/9xfu2re'>http://www.behance.net/9xfu2re</StyledLink>
+				Дизайн иллюстрации:{' '}
+				<StyledLink to='http://www.behance.net/9xfu2re'>http://www.behance.net/9xfu2re</StyledLink>
 			</Footer>
 		</Page>
 	);
