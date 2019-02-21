@@ -96,8 +96,7 @@ class Points extends Component {
 		return (
 			<List>
 				<Title>
-					Нужно выбрать категорию и кликнуть на карте там, где поставить метку. Удалить поставленное пока не
-					получится.
+					Нужно выбрать категорию и кликнуть на карте там, где поставить метку.
 				</Title>
 				{POINTS.map(value => (
 					<React.Fragment key={value.id}>
