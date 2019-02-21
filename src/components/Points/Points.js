@@ -4,6 +4,7 @@ import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
+import { MOBILE_SIZE } from '~/constants/common';
 import { POINTS } from '~/constants/points';
 import { MAIN_COLOR, BORDER_COLOR } from '~/constants/styles';
 
@@ -16,6 +17,10 @@ const List = styled.ul`
 const Title = styled.h4`
 	margin: 0 0 20px;
 	font-weight: normal;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		margin: 10px 0 5px;
+	}
 `;
 
 const Row = styled.li`
@@ -50,6 +55,10 @@ const Image = styled.img`
 	padding: 5px;
 	background-color: ${MAIN_COLOR};
 	border-radius: 5px;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		width: 30px;
+	}
 `;
 
 const CustomInput = styled.input`
