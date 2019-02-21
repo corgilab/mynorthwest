@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
+import { MOBILE_SIZE } from '~/constants/common';
 
 const StyledNavigation = styled.nav`
 	position: absolute;
@@ -13,6 +14,11 @@ const StyledNavigation = styled.nav`
 
 const Title = styled.h1`
 	font-size: 1.75rem;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		font-size: 1.3rem;
+		margin: 0;
+	}
 `;
 
 const StyledLink = styled(Link)`

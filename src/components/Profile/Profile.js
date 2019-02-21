@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { saveState } from '~/helpers/localStorage';
 import { AGES, SEX, ANSWERS, ACTIONS } from '~/constants/profile';
 import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
+import { MOBILE_SIZE } from '~/constants/common';
 import { insertProfileData } from '~/helpers/firebase';
 
 const StyledProfile = styled.form``;
@@ -14,10 +15,18 @@ const StyledProfile = styled.form``;
 const Header = styled.h3`
 	margin: 0 0 20px;
 	font-weight: bold;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		margin: 10px 0 10px;
+	}
 `;
 
 const Title = styled.h4`
 	margin: 15px 0 5px;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		margin: 5px 0 0px;
+	}
 `;
 
 const List = styled.ul`

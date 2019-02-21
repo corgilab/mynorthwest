@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { MAP_ROUTE } from '~/constants/routers';
 import { MAIN_COLOR, FONT_COLOR } from '~/constants/styles';
+import { MOBILE_SIZE } from '~/constants/common';
 import AnimationBackground from './AnimationBackground';
 
 const Page = styled.main`
@@ -20,11 +21,20 @@ const Content = styled.div`
 	position: absolute;
 	top: 100px;
 	left: 250px;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		top: 40px;
+		left: 20px;
+	}
 `;
 
 const Title = styled.h1`
 	font-size: 36px;
 	margin-bottom: 20px;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		font-size: 26px;
+	}
 `;
 
 const Text = styled.div`
@@ -32,6 +42,10 @@ const Text = styled.div`
 	font-size: 20px;
 	line-height: 2rem;
 	margin-bottom: 50px;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		width: 90vw;
+	}
 `;
 
 const Button = styled(Link)`
