@@ -37,7 +37,8 @@ module.exports = {
 	plugins: [
 		new HtmlWebPackPlugin({
 			template: './src/index.html',
-			filename: './index.html'
+			filename: './index.html',
+			favicon: "./favicon.ico"
 		}),
 		new webpack.DefinePlugin({
 			'PATH_TO_RESOURCES': PATH_TO_RESOURCES[ENV],

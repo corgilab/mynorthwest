@@ -84,7 +84,6 @@ const StyledLink = styled(Link)`
 	}
 `;
 
-
 const MainPage = () => {
 	return (
 		<Page>
@@ -98,9 +97,11 @@ const MainPage = () => {
 				<Button to={MAP_ROUTE}>Добавить идею!</Button>
 			</Content>
 			<Footer>
-                Обратная связь: <StyledLink to="mailto:moysevz@gmail.com">moysevz@gmail.com</StyledLink>
-                <br/>Разработано: <StyledLink to="https://corgilab.ru">КоргиЛаб</StyledLink>
-                <br/>Дизайн иллюстрации: <StyledLink to="http://www.behance.net/9xfu2re">Алексей 9</StyledLink>
+				Обратная связь: <StyledLink to='mailto:moysevz@gmail.com'>moysevz@gmail.com</StyledLink>
+				<br />
+				Разработано: <StyledLink to='https://corgilab.ru'>КоргиЛаб</StyledLink>
+				<br />
+				Дизайн иллюстрации: <StyledLink to='http://www.behance.net/9xfu2re'>http://www.behance.net/9xfu2re</StyledLink>
 			</Footer>
 		</Page>
 	);
