@@ -64,6 +64,27 @@ const Button = styled(Link)`
 	}
 `;
 
+const Footer = styled.div`
+    color: ${FONT_COLOR}
+	display: block;
+	position: absolute;
+	bottom: 10px;
+	left: 250px;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		top: 40px;
+		left: 20px;
+	}
+`;
+
+const StyledLink = styled(Link)`
+	color: ${FONT_COLOR};
+	&:hover {
+		color: ${MAIN_COLOR};
+	}
+`;
+
+
 const MainPage = () => {
 	return (
 		<Page>
@@ -76,6 +97,11 @@ const MainPage = () => {
 				</Text>
 				<Button to={MAP_ROUTE}>Добавить идею!</Button>
 			</Content>
+			<Footer>
+                Обратная связь: <StyledLink to="mailto:moysevz@gmail.com">moysevz@gmail.com</StyledLink>
+                <br/>Разработано: <StyledLink to="https://corgilab.ru">КоргиЛаб</StyledLink>
+                <br/>Дизайн иллюстрации: <StyledLink to="http://www.behance.net/9xfu2re">Алексей 9</StyledLink>
+			</Footer>
 		</Page>
 	);
 };
