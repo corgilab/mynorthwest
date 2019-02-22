@@ -10,6 +10,10 @@ const StyledNavigation = styled.nav`
 	top: 25px;
 	left: 50px;
 	z-index: 20;
+
+	@media (max-width: ${`${MOBILE_SIZE}px`}) {
+		top: 5px;
+	}
 `;
 
 const Title = styled.h1`

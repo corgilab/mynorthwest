@@ -17,7 +17,7 @@ const Header = styled.h3`
 	font-weight: bold;
 
 	@media (max-width: ${`${MOBILE_SIZE}px`}) {
-		margin: 10px 0 10px;
+		margin: 15px 0 10px;
 	}
 `;
 

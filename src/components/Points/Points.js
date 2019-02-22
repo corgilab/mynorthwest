@@ -19,7 +19,7 @@ const Title = styled.h4`
 	font-weight: normal;
 
 	@media (max-width: ${`${MOBILE_SIZE}px`}) {
-		margin: 10px 0 5px;
+		margin: 20px 0 5px;
 	}
 `;
 
