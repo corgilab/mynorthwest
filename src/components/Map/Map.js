@@ -42,13 +42,13 @@ const Icon = styled.img`
 
 const MarkerDelete = styled.span`
 	position: absolute;
-	right: -3px;
-	top: -30px;
+	right: 16px;
+	top: -52px;
+	z-index: 1;
 	height: 13px;
 	width: 13px;
 	background: url('${PATH_TO_RESOURCES}/images/close.svg') no-repeat;
 	background-size: cover;
-	pointer-events: auto;
 	cursor: pointer;
 `;
 
@@ -116,10 +116,8 @@ const Map = props => {
 
 				return validPoint ? (
 					<Marker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
+						{value.userId === store.userId ? <MarkerDelete onClick={handleDeleteMarker(value)} /> : null}
 						<MarketImage>
-							{value.userId === store.userId ? (
-								<MarkerDelete onClick={handleDeleteMarker(value)} />
-							) : null}
 							<Icon src={validPoint && validPoint.imgSrc} />
 						</MarketImage>
 					</Marker>
