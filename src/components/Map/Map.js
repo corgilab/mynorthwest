@@ -116,9 +116,7 @@ const Map = props => {
 
 				return validPoint ? (
 					<Marker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
-						{value.userId === store.userId ? (
-							<MarkerDelete onClick={handleDeleteMarker(value)} />
-						) : null}
+						{value.userId === store.userId ? <MarkerDelete onClick={handleDeleteMarker(value)} /> : null}
 						<MarketImage>
 							<Icon src={validPoint && validPoint.imgSrc} />
 						</MarketImage>
