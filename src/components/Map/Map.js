@@ -93,8 +93,7 @@ const Map = props => {
 	};
 
 	const handleDeleteMarker = point => event => {
-		event.preventDefault();
-
+		event.stopPropagation();
 		setPoints([...without(points, point)]);
 		deletePoint(point);
 	};

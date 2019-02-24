@@ -51,7 +51,7 @@ const ExtraRow = styled.li`
 `;
 
 const Image = styled.img`
-	width: 50px;
+	width: 40px;
 	padding: 5px;
 	background-color: ${MAIN_COLOR};
 	border-radius: 5px;
