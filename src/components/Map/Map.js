@@ -77,6 +77,7 @@ const Map = props => {
 
 	const handleAddPoint = event => {
 		const { store } = props;
+		console.log('handleAddPoint'); // eslint-disable-line no-console
 
 		event.preventDefault();
 
@@ -87,15 +88,16 @@ const Map = props => {
 				type: store.pointType,
 				userId: store.userId,
 			};
-			setPoints([...points, newPoint]);
 			insertPoint(newPoint);
+			setPoints([...points, newPoint]);
 		}
 	};
 
 	const handleDeleteMarker = point => event => {
+		console.log('handleDeleteMarker'); // eslint-disable-line no-console
 		event.stopPropagation();
-		setPoints([...without(points, point)]);
 		deletePoint(point);
+		setPoints([...without(points, point)]);
 	};
 
 	const _validatePointType = (id, type) => id === type || id === type.split('_')[0];
