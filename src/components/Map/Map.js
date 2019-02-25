@@ -13,10 +13,6 @@ import { TOKEN, STYLE, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { MAIN_COLOR } from '~/constants/styles';
 import { POINTS } from '~/constants/points';
 
-const StyledMarker = styled(Marker)`
-	pointer-events: none;
-`;
-
 const MarketImage = styled.span`
 	position: relative;
 	top: -50px;
@@ -44,7 +40,6 @@ const Icon = styled.img`
 `;
 
 const MarkerDelete = styled.span`
-	pointer-events: auto;
 	position: absolute;
 	right: 12px;
 	top: -55px;
@@ -117,12 +112,12 @@ const Map = props => {
 				const validPoint = find(POINTS, p => _validatePointType(p.id, value.type));
 
 				return validPoint ? (
-					<StyledMarker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
+					<Marker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
 						{value.userId === store.userId ? <MarkerDelete onClick={handleDeleteMarker(value)} /> : null}
 						<MarketImage>
 							<Icon src={validPoint && validPoint.imgSrc} />
 						</MarketImage>
-					</StyledMarker>
+					</Marker>
 				) : null;
 			})}
 		</MapGL>
