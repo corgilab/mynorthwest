@@ -83,7 +83,6 @@ const Map = props => {
 		const { store } = props;
 
 		event.preventDefault();
-
 		if (store.pointType && store.userId) {
 			const newPoint = {
 				long: event.lngLat[0],
@@ -97,11 +96,9 @@ const Map = props => {
 	};
 
 	const handleDeleteMarker = point => event => {
-		event.preventDefault();
 		event.stopPropagation();
 		deletePoint(point);
 		setPoints([...without(points, point)]);
-		return false;
 	};
 
 	const _validatePointType = (id, type) => id === type || id === type.split('_')[0];
