@@ -13,8 +13,11 @@ import { TOKEN, STYLE, LATITUDE, LONGITUDE, ZOOM } from '~/constants/map';
 import { MAIN_COLOR } from '~/constants/styles';
 import { POINTS } from '~/constants/points';
 
-const MarketImage = styled.span`
+const StyledMarker = styled(Marker)`
 	pointer-events: none;
+`;
+
+const MarketImage = styled.span`
 	position: relative;
 	top: -50px;
 	left: -20px;
@@ -41,12 +44,13 @@ const Icon = styled.img`
 `;
 
 const MarkerDelete = styled.span`
+	pointer-events: auto;
 	position: absolute;
-	right: 16px;
-	top: -52px;
+	right: 12px;
+	top: -55px;
 	z-index: 1;
-	height: 13px;
-	width: 13px;
+	height: 17px;
+	width: 17px;
 	background: url('${PATH_TO_RESOURCES}/images/close.svg') no-repeat;
 	background-size: cover;
 	cursor: pointer;
@@ -77,7 +81,6 @@ const Map = props => {
 
 	const handleAddPoint = event => {
 		const { store } = props;
-		console.log('handleAddPoint'); // eslint-disable-line no-console
 
 		event.preventDefault();
 
@@ -94,10 +97,11 @@ const Map = props => {
 	};
 
 	const handleDeleteMarker = point => event => {
-		console.log('handleDeleteMarker'); // eslint-disable-line no-console
+		event.preventDefault();
 		event.stopPropagation();
 		deletePoint(point);
 		setPoints([...without(points, point)]);
+		return false;
 	};
 
 	const _validatePointType = (id, type) => id === type || id === type.split('_')[0];
@@ -116,12 +120,12 @@ const Map = props => {
 				const validPoint = find(POINTS, p => _validatePointType(p.id, value.type));
 
 				return validPoint ? (
-					<Marker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
+					<StyledMarker key={index} longitude={value.long} latitude={value.lat} draggable={false}>
 						{value.userId === store.userId ? <MarkerDelete onClick={handleDeleteMarker(value)} /> : null}
 						<MarketImage>
 							<Icon src={validPoint && validPoint.imgSrc} />
 						</MarketImage>
-					</Marker>
+					</StyledMarker>
 				) : null;
 			})}
 		</MapGL>
@@ -132,4 +136,4 @@ Map.propTypes = {
 	store: PropTypes.objectOf(PropTypes.shape({})),
 };
 
-export default Map;
+export default React.memo(Map);
