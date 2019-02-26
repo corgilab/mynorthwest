@@ -77,13 +77,6 @@ const Footer = styled.div`
 	}
 `;
 
-const StyledLink = styled(Link)`
-	color: ${FONT_COLOR};
-	&:hover {
-		color: ${MAIN_COLOR};
-	}
-`;
-
 const MainPage = () => {
 	return (
 		<Page>
@@ -92,17 +85,17 @@ const MainPage = () => {
 				<Title>МойСевероЗапад.рф</Title>
 				<Text>
 					Интерактивный портал по сбору идей для формирования комфортных общественных пространств
-					Северо-Западного района города Курска. <p/>Просто добавь свою идею на общую карту!
+					Северо-Западного района города Курска. <p />
+					Просто добавь свою идею на общую карту!
 				</Text>
 				<Button to={MAP_ROUTE}>Добавить идею!</Button>
 			</Content>
 			<Footer>
-				Обратная связь: <StyledLink to='mailto:moysevz@gmail.com'>moysevz@gmail.com</StyledLink>
+				Обратная связь: <a href='mailto:moysevz@gmail.com'>moysevz@gmail.com</a>
 				<br />
-				Разработано: <StyledLink to='https://corgilab.ru'>КоргиЛаб</StyledLink>
+				Разработано: <a href='https://corgilab.ru'>https://corgilab.ru</a>
 				<br />
-				Дизайн иллюстрации:{' '}
-				<StyledLink to='http://www.behance.net/9xfu2re'>http://www.behance.net/9xfu2re</StyledLink>
+				Дизайн иллюстрации: <a href='http://www.behance.net/9xfu2re'>http://www.behance.net/9xfu2re</a>
 			</Footer>
 		</Page>
 	);
